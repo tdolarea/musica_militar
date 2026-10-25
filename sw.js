@@ -1,4 +1,4 @@
-// SW Musica Militar Anthems New 1792957919
+// SW Musica Militar Novio Reclassified 1792958018
 self.addEventListener('install', e => self.skipWaiting());
 self.addEventListener('activate', e => {
   e.waitUntil(
