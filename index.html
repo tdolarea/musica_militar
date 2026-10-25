@@ -133,6 +133,7 @@
       background: #334155; border: 1px solid #475569; color: white; padding: 6px 12px;
       border-radius: 6px; font-size: 12px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 4px;
     }
+    .btn-reorder:active { transform: scale(0.95); }
     .btn-del-item {
       background: #991b1b; border: 1px solid #ef4444; color: white; padding: 6px 12px;
       border-radius: 6px; font-size: 12px; font-weight: 800; cursor: pointer; margin-left: auto;
@@ -394,12 +395,12 @@
     Música Militar · Armada Española · @TDF 2025
   </footer>
 
-  <!-- CANALES DE AUDIO DUAL -->
+  <!-- CANALES DE AUDIO DUAL TOTALMENTE INDEPENDIENTES -->
   <audio id="audioBandaMMT" preload="auto" playsinline></audio>
   <audio id="audioCornetaMMT" preload="auto" playsinline></audio>
 
   <script>
-    const APP_VERSION = 'v1792957467';
+    const APP_VERSION = 'v1792957816';
 
     // ==========================================
     // BASES DE DATOS TOTALES
@@ -408,11 +409,44 @@
     const CORNETAS_DB = [{"id": "co_alto", "nombre": "Alto", "archivo": "audio/ALTO.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/ALTO.mp3"}, {"id": "co_armen", "nombre": "Armen armas", "archivo": "audio/ARMEN.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/ARMEN.mp3"}, {"id": "co_atencion", "nombre": "Atencion", "archivo": "audio/ATENCION.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/ATENCION.mp3"}, {"id": "co_cambiodehombro", "nombre": "Cambio De Hombro", "archivo": "audio/CAMBIO DE HOMBRO.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/CAMBIO%20DE%20HOMBRO.mp3"}, {"id": "co_cubrirse", "nombre": "Cubrirse", "archivo": "audio/CUBRIRSE.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/CUBRIRSE.mp3"}, {"id": "co_defrentepasofunerala", "nombre": "De frente Paso Funerala", "archivo": "audio/DEFRENTE PASO FUNERALA.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/DEFRENTE%20PASO%20FUNERALA.mp3"}, {"id": "co_defrentepasoligero", "nombre": "De frente Paso Ligero", "archivo": "audio/DEFRENTE PASO LIGERO.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/DEFRENTE%20PASO%20LIGERO.mp3"}, {"id": "co_defrente", "nombre": "De frente", "archivo": "audio/DEFRENTE.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/DEFRENTE.mp3"}, {"id": "co_derecha", "nombre": "Derecha", "archivo": "audio/DERECHA.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/DERECHA.mp3"}, {"id": "co_descanso", "nombre": "Descanso", "archivo": "audio/DESCANSO.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/DESCANSO.mp3"}, {"id": "co_diana", "nombre": "Diana", "archivo": "audio/DIANA.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/DIANA.mp3"}, {"id": "co_discreccion", "nombre": "Discreccion", "archivo": "audio/DISCRECCION.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/DISCRECCION.mp3"}, {"id": "co_findiscreccion", "nombre": "Fin Discreccion", "archivo": "audio/FIN_DISCRECCION.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/FIN_DISCRECCION.mp3"}, {"id": "co_firmesautoridadprincipal", "nombre": "Firmes Autoridad Principal", "archivo": "audio/FIRMES AUTORIDAD PRINCIPAL.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/FIRMES%20AUTORIDAD%20PRINCIPAL.mp3"}, {"id": "co_firmes", "nombre": "Firmes", "archivo": "audio/FIRMES.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/FIRMES.mp3"}, {"id": "co_himnomacional", "nombre": "Himno Nacional a Corneta", "archivo": "audio/HIMNOMACIONAL.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/HIMNOMACIONAL.mp3"}, {"id": "co_izquierda", "nombre": "Izquierda", "archivo": "audio/IZQUIERDA.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/IZQUIERDA.mp3"}, {"id": "co_llamadageneral", "nombre": "Llamada General", "archivo": "audio/LLAMADA GENERAL.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/LLAMADA%20GENERAL.mp3"}, {"id": "co_llamadamandos", "nombre": "Llamada Mandos", "archivo": "audio/LLAMADA_MANDOS.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/LLAMADA_MANDOS.mp3"}, {"id": "co_mediavueltaar", "nombre": "Media Vuelta Ar", "archivo": "audio/MEDIA_VUELTA_AR.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/MEDIA_VUELTA_AR.mp3"}, {"id": "co_oracioncorneta", "nombre": "Toque de Oración", "archivo": "audio/ORACION_CORNETA.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/ORACION_CORNETA.mp3"}, {"id": "co_presentenarmas", "nombre": "Presenten armas", "archivo": "audio/PRESENTEN_ARMAS.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/PRESENTEN_ARMAS.mp3"}, {"id": "co_retreta", "nombre": "Retreta", "archivo": "audio/RETRETA.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/RETRETA.mp3"}, {"id": "co_sobreelhombroderecho", "nombre": "Sobre El Hombro Derecho", "archivo": "audio/SOBRE EL HOMBRO DERECHO.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/SOBRE%20EL%20HOMBRO%20DERECHO.mp3"}, {"id": "co_sobreelhombro", "nombre": "Sobre El Hombro", "archivo": "audio/SOBRE EL HOMBRO.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/SOBRE%20EL%20HOMBRO.mp3"}];
     const LETRAS_DB = {"salve_marinera": {"title": "Salve Marinera", "author": "Música: Cristóbal Oudrid | Letra: Mariano Méndez Vigo", "text": "¡Salve, Estrella de los mares,\nde los mares iris de eterna ventura!\n¡Salve, fénix de hermosura,\nMadre del Amor!\n¡Madre del Amor!\n\nA Ti, celestial Señora,\na Ti, dulce y limpia flor,\ncon el alma que Te adora,\npide la Armada su honor.\n\nDe tu piedad infinita\nalcanza para el marino,\nla gracia de tu cariño\ny el perdón de su Señor.\n\n¡Salve, Estrella de los mares!\n¡Salve, Estrella de los mares!\n¡Salve, Salve, Salve, Salve!"}, "oracion_noche": {"title": "Oración de la Noche", "author": "Tradición de la Armada Española", "text": "Tú que dispones de cielo y mar,\nhaces la calma y la tempestad,\nten de nosotros piedad, Señor,\nde los que vagan por el mar.\n\nTen de nosotros piedad, Señor,\nde los que vagan por el mar.\nGuarda sus vidas con tu poder,\nguía sus pasos al bien y al deber.\nDales la paz y la libertad,\nguárdalos siempre en tu bondad.\n\nAmén."}, "himno_infanteria_marina": {"title": "Marcha Heroica de Infantería de Marina", "author": "Música: Cándido R. Landache | Letra: José Mª Pemán", "text": "Infantes de Marina, marchemos a luchar,\nla Patria nos encarga las glorias de su mar.\nTriunfar o morir, por España pelear,\nque el honor de España es vencer o morir.\n\nPor la Cruz y por España,\nlucharemos con valor,\ny en la tierra y en el mar,\nla victoria brillará.\n\n¡Viva España! ¡Viva el Rey!\n¡Honor y Gloria a la Infantería de Marina!"}, "himno_armada": {"title": "Himno de la Armada", "author": "Armada Española", "text": "Marineros de España cantemos,\na la Patria con gozo y honor,\ny la enseña bendita juremos,\ndefender con orgullo y valor.\n\nPor los mares surcados de gloria,\nnuestras quillas supieron vencer,\ny en el libro inmortal de la historia,\nnuestro lema es triunfar o perder.\n\n¡Viva España! ¡Viva la Armada!"}, "himno_nacional": {"title": "Marcha Real (Himno Nacional)", "author": "Tradición / Letra histórica (José Mª Pemán)", "text": "¡Viva España! Alzad los brazos, hijos\ndel pueblo español,\nque vuelve a resurgir.\n\nGloria a la Patria que supo seguir,\nsobre el azul del mar el caminar del sol.\n\n¡Triunfa, España! Los yunques y las ruedas\ncanten al compás\ndel himno de la fe.\n\nJuntos con ellos cantemos de pie\nla vida nueva y fuerte de trabajo y paz."}, "la_muerte_no_es_el_final": {"title": "La Muerte no es el Final", "author": "Música y Letra: Cesáreo Gabaráin", "text": "Tú nos dijiste que la muerte\nno es el final del camino,\nque aunque de nuevo el cuerpo vuelva\na ser polvo en el polvo,\nel alma vivirá contigo.\n\nCuando la pena nos alcanza\npor un hermano perdido,\ncuando el adiós dolorido\nbusca en la fe su esperanza,\nen Tu palabra confiamos\ncon la certeza de hijos:\nque ya descanse en la gloria\nel que en la tierra ha servido."}, "cantinera": {"title": "La Cantinera", "author": "Tradición militar", "text": "Hoy aquí en tierra\r\nmañana en la mar\r\nlistos a zarpar.\r\n\r\nEn paz o en guerra\r\nen calma o en tormenta\r\nhay que navegar.\r\n\r\nEcha cantinera\r\nvino para todos\r\nquién sabe si cualquiera\r\nde los que aquí estamos\r\nnunca volverá.\r\n\r\nEl ancla zarpó avante\r\nlas dos rumbo\r\nhacia alta mar.\r\n\r\nDime serviola\r\nsi aún en el muelle\r\na mi novia ves llorar.\r\n\r\nDéjala que llore\r\nqué me importa su llanto\r\nsi a pocas singladuras\r\ncuando atraquemos\r\notra encontrarás."}, "lascorsarias": {"title": "Las Corsarias (Banderita)", "author": "Tradición militar", "text": "Allá por la tierra mora,\r\nallá por tierra africana,\r\nun soldadito español,\r\nde esta manera cantaba:\r\n\r\nComo el fino de Jerez,\r\ny el tintillo de Rioja,\r\nson los colores que tiene\r\nla Banderita Española,\r\nla Banderita Española.\r\n\r\nCuando estoy en tierra extraña\r\ny contemplo tus colores\r\ny me acuerdo de mi España,\r\nmira si yo te querré.\r\n\r\nComo el fino de Jerez,\r\ny el tintillo de Rioja,\r\nson los colores que tiene\r\nla Banderita Española,\r\nla Banderita Española.\r\n\r\nBanderita tu eres roja,\r\nBanderita tu eres gualda,\r\nllevas sangre, llevas oro\r\nen el fondo de tu alma.\r\n\r\nY el día que yo me muera,\r\nsi estoy lejos de mi Patria\r\nsólo quiero que me cubran\r\ncon la Bandera de España.\r\n\r\nBanderita tu eres roja,\r\nBanderita tu eres gualda,\r\nllevas sangre, llevas oro\r\nen el fondo de tu alma.\r\n\r\nY el día que yo me muera,\r\nsi estoy lejos de mi Patria\r\n¡Sólo quiero que me cubran\r\ncon la Bandera de España!"}, "noviodelamuerte": {"title": "El Novio de la Muerte", "author": "Tradición militar", "text": "Nadie en el Tercio sabía\r\nquien era aquel legionario\r\ntan audaz y temerario\r\nque a la Legión se alistó.\r\n\r\nNadie sabía su historia\r\nmás la Legión suponía\r\nque un gran dolor le mordía\r\ncomo un lobo el corazón.\r\n\r\nMás si alguno quién era le preguntaba\r\ncon dolor y rureza le contestaba:\r\n\r\nSoy un hombre a quien la suerte\r\nhirió con zarpa de fiera\r\nsoy un novio de la muerte\r\nque va a unirse en lazo fuerte\r\ncon tan leal compañera.\r\n\r\nCuando más rudo era el fuego\r\ny la pelea más fiera\r\ndefendiendo su Bandera\r\nel legionario avanzó.\r\n\r\nY sin temer al empuje\r\ndel enemigo exaltado\r\nsupo morir como un bravo\r\ny la Enseña rescató.\r\n\r\nY al regar con su sangre la tierra ardiente\r\nmurmuró el legionario con voz doliente:\r\n\r\nSoy un hombre a quien la suerte\r\nhirió con zarpa de fiera\r\nsoy un novio de la muerte\r\nque va a unirse en lazo fuerte\r\ncon tan leal compañera.\r\n\r\nCuando al fin le recogieron\r\nentre su pecho encontraron\r\nuna carta y un retrato\r\nde una divina mujer.\r\n\r\nAquella carta decía:\r\n“Si algún día Dios te llama\r\npara mí un puesto reclama\r\nque a buscarte pronto iré.”\r\n\r\nY en el último verso que le enviaba,\r\nsu postrer despedida le consagraba:\r\n\r\n“Por ir a tu lado a verte,\r\nmi más leal compañera,\r\nme hice novio de la muerte,\r\nla estreché con lazo fuerte\r\n\r\ny su amor fue mi ¡Bandera!”"}, "oraciondelanoche": {"title": "Oración de la Noche", "author": "Tradición militar", "text": "Tú que dispones\r\nde viento y mar,\r\nhaces la calma,\r\nla tempestad.\r\nTen de nosotros Señor,\r\npiedad,\r\npiedad, Señor,\r\nSeñor, piedad."}, "salvemarinera": {"title": "Salve Marinera", "author": "Tradición militar", "text": "Salve Marinera\r\nSalve, Estrella de los mares,\r\nde los mares iris, de eterna ventura.\r\nSalve,  oh! F nix de hermosura\r\nMadre del divino amor.\r\n\r\nDe tu pueblo, a los pesares\r\ntu clemencia de consuelo.\r\nFervoroso llegue al cielo y hasta Ti,\r\ny hasta Ti, nuestro clamor.\r\n\r\nSalve, salve, Estrella de los mares.\r\nSalve, Estrella de los mares.\r\nS , fervoroso llegue al cielo, y hasta Ti,\r\ny hasta Ti, nuestro clamor.\r\n\r\nSalve, salve Estrella de los mares,\r\nEstrella de los mares,\r\nsalve, salve, salve, salve."}};
 
-    // REPRODUCTORES DUALES
+    // REPRODUCTORES DUALES SEPARADOS EN HARDWARE
     const audioBanda = document.getElementById('audioBandaMMT');
     const audioCorneta = document.getElementById('audioCornetaMMT');
 
     let itemMusicaSeleccionado = null;
+
+    // Web Audio API para asegurar que la corneta NO interrumpa la banda en móviles
+    let audioCtx = null;
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioCtxClass) {
+          audioCtx = new AudioCtxClass();
+        }
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    let activeCornetaSource = null;
+    const cornetaBuffers = {};
+
+    async function precargarBufferCorneta(url) {
+      const ctx = getAudioContext();
+      if (!ctx) return null;
+      if (cornetaBuffers[url]) return cornetaBuffers[url];
+      try {
+        const res = await fetch(url);
+        const arrayBuf = await res.arrayBuffer();
+        const decoded = await ctx.decodeAudioData(arrayBuf);
+        cornetaBuffers[url] = decoded;
+        return decoded;
+      } catch(e) {
+        return null;
+      }
+    }
 
     // ESTADO DE PLAYLISTS
     let indicePistaSeleccionadaEnVentana = -1;
@@ -449,7 +483,6 @@
     function onMusicaSelectChange(activeSelect, cat) {
       const val = activeSelect.value;
 
-      // Desmarcar todos y restaurar a 'Seleccione...' los otros 3
       selectIds.forEach(id => {
         const el = document.getElementById(id);
         if (el && el !== activeSelect) {
@@ -485,7 +518,7 @@
     }
 
     // ==========================================
-    // CANAL 1: BANDA DE MÚSICA
+    // CANAL 1: BANDA DE MÚSICA (TOTALMENTE AUTÓNOMO)
     // ==========================================
     audioBanda.onended = () => {
       onBandaFin();
@@ -562,15 +595,13 @@
     }
 
     // ==========================================
-    // CANAL 2: TOQUES DE CORNETA (INDEPENDIENTE)
+    // CANAL 2: TOQUES DE CORNETA (SIMULTÁNEO CON LA BANDA)
     // ==========================================
     audioCorneta.onended = () => {
       onCornetaFin();
-      if (playlistEnCurso && audioBanda.paused) avanzarPlaylistPasoMMT();
     };
     audioCorneta.onerror = () => {
       onCornetaFin();
-      if (playlistEnCurso && audioBanda.paused) avanzarPlaylistPasoMMT();
     };
 
     function playCornetaSeleccionadaMMT() {
@@ -584,13 +615,33 @@
       if (item) playCornetaAudioItem(item);
     }
 
-    function playCornetaAudioItem(item) {
+    async function playCornetaAudioItem(item) {
       stopCornetaMMT();
       const statusBox = document.getElementById('statusCornetaMMT');
       const statusText = document.getElementById('statusCornetaTextMMT');
       if (statusBox) statusBox.style.display = 'flex';
       if (statusText) statusText.textContent = '📯 ' + item.nombre;
 
+      // Intentar Web Audio API para no interrumpir JAMÁS el canal de música en móviles
+      const ctx = getAudioContext();
+      if (ctx) {
+        try {
+          const buffer = await precargarBufferCorneta(item.archivo) || (item.urlRemota ? await precargarBufferCorneta(item.urlRemota) : null);
+          if (buffer) {
+            const srcNode = ctx.createBufferSource();
+            srcNode.buffer = buffer;
+            srcNode.connect(ctx.destination);
+            srcNode.onended = () => { onCornetaFin(); };
+            activeCornetaSource = srcNode;
+            srcNode.start(0);
+            return;
+          }
+        } catch(e) {
+          console.warn('Fallback a audio tag corneta:', e);
+        }
+      }
+
+      // Fallback a segundo elemento <audio> HTML5
       audioCorneta.src = item.archivo;
       audioCorneta.currentTime = 0;
       audioCorneta.play().catch(e => {
@@ -604,13 +655,21 @@
     }
 
     function stopCornetaMMT() {
+      if (activeCornetaSource) {
+        try { activeCornetaSource.stop(); } catch(e){}
+        activeCornetaSource = null;
+      }
       try { audioCorneta.pause(); audioCorneta.currentTime = 0; } catch(e){}
       onCornetaFin();
     }
 
     function onCornetaFin() {
+      activeCornetaSource = null;
       const statusBox = document.getElementById('statusCornetaMMT');
       if (statusBox) statusBox.style.display = 'none';
+      if (playlistEnCurso && audioBanda.paused) {
+        avanzarPlaylistPasoMMT();
+      }
     }
 
     function addCornetaSeleccionadaAPlaylistMMT() {
