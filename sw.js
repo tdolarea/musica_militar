@@ -1,4 +1,4 @@
-// SW Musica Militar Lista Ejemplo con De Frente 1792959260
+// SW Musica Militar Clean Badges v1792959409
 self.addEventListener('install', e => self.skipWaiting());
 self.addEventListener('activate', e => {
   e.waitUntil(
