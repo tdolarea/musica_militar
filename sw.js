@@ -1,4 +1,4 @@
-// SW Musica Militar No Spain Lyrics 1792958151
+// SW Musica Militar Clean Titles v1792958386
 self.addEventListener('install', e => self.skipWaiting());
 self.addEventListener('activate', e => {
   e.waitUntil(
