@@ -1,4 +1,4 @@
-// SW Musica Militar Playlist Mgmt Bar v1792961120
+// SW Musica Militar Quitar Pista Blue v1792961187
 self.addEventListener('install', e => self.skipWaiting());
 self.addEventListener('activate', e => {
   e.waitUntil(
