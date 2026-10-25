@@ -1,4 +1,4 @@
-// SW Musica Militar Novio Reclassified 1792958018
+// SW Musica Militar No Spain Lyrics 1792958151
 self.addEventListener('install', e => self.skipWaiting());
 self.addEventListener('activate', e => {
   e.waitUntil(
