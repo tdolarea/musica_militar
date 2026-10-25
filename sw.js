@@ -1,4 +1,4 @@
-// SW Musica Militar Dual Engine Clean 1792957816
+// SW Musica Militar Anthems New 1792957919
 self.addEventListener('install', e => self.skipWaiting());
 self.addEventListener('activate', e => {
   e.waitUntil(
