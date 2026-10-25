@@ -1,4 +1,4 @@
-// SW Musica Militar PWA v1792952689
+// SW Musica Militar Monomódulo 1792952820
 self.addEventListener('install', e => self.skipWaiting());
 self.addEventListener('activate', e => {
   e.waitUntil(
