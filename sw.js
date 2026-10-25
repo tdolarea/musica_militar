@@ -1,4 +1,4 @@
-// SW Musica Militar Strict User Texts v1792959843
+// SW Musica Militar Card Contrast v1792959999
 self.addEventListener('install', e => self.skipWaiting());
 self.addEventListener('activate', e => {
   e.waitUntil(
