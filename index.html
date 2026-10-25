@@ -143,7 +143,7 @@
       border-radius: 6px; font-size: 12px; font-weight: 800; cursor: pointer; margin-left: auto;
     }
 
-    .playlist-exec-bar { display: grid; grid-template-columns: 1.3fr 1.1fr 1fr 1fr; gap: 6px; }
+    .playlist-exec-bar { display: grid; grid-template-columns: 1.4fr 1.1fr 1.1fr; gap: 8px; }
 
     /* Modal de Letras */
     .modal-overlay {
@@ -523,9 +523,6 @@
         <button type="button" class="btn-action-main" style="background: #0284c7; color: white;" onclick="saltarSiguientePistaPlaylistMMT()">
           <span>⏭️</span> <span>NEXT</span>
         </button>
-        <button type="button" class="btn-action-main" style="background: #dc2626; color: white;" onclick="detenerPlaylistMMT()">
-          <span>⏹️</span> <span>DETENER</span>
-        </button>
         <button type="button" class="btn-action-main" style="background: #1e3a8a; color: #38bdf8; border: 1.5px solid #38bdf8;" onclick="guardarListaActualMMT()">
           <span>💾</span> <span>GUARDAR</span>
         </button>
@@ -556,7 +553,7 @@
   <audio id="audioCornetaMMT" preload="auto" playsinline></audio>
 
   <script>
-    const APP_VERSION = 'v1792960577';
+    const APP_VERSION = 'v1792960790';
 
     // ==========================================
     // BASES DE DATOS TOTALES CON PAÍSES

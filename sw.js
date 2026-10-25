@@ -1,4 +1,4 @@
-// SW Musica Militar Next Button v1792960577
+// SW Musica Militar Clean Playlist Bar v1792960790
 self.addEventListener('install', e => self.skipWaiting());
 self.addEventListener('activate', e => {
   e.waitUntil(
