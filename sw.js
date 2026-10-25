@@ -1,4 +1,4 @@
-// SW Musica Militar Quitar Pista Blue v1792961187
+// SW Musica Militar Red Delete Buttons v1792961372
 self.addEventListener('install', e => self.skipWaiting());
 self.addEventListener('activate', e => {
   e.waitUntil(
