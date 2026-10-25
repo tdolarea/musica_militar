@@ -1,4 +1,4 @@
-// SW Musica Militar Blue Borders and Fixed Banda v1792960312
+// SW Musica Militar Next Button v1792960577
 self.addEventListener('install', e => self.skipWaiting());
 self.addEventListener('activate', e => {
   e.waitUntil(

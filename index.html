@@ -143,9 +143,7 @@
       border-radius: 6px; font-size: 12px; font-weight: 800; cursor: pointer; margin-left: auto;
     }
 
-    .playlist-exec-bar {
-      display: grid; grid-template-columns: 2fr 1.2fr 1fr; gap: 8px;
-    }
+    .playlist-exec-bar { display: grid; grid-template-columns: 1.3fr 1.1fr 1fr 1fr; gap: 6px; }
 
     /* Modal de Letras */
     .modal-overlay {
@@ -522,6 +520,9 @@
         <button type="button" id="btnPlayPlaylist" class="btn-action-main" style="background: #16a34a; color: white;" onclick="iniciarPlaylistMMT()">
           <span>▶️</span> <span>INICIAR</span>
         </button>
+        <button type="button" class="btn-action-main" style="background: #0284c7; color: white;" onclick="saltarSiguientePistaPlaylistMMT()">
+          <span>⏭️</span> <span>NEXT</span>
+        </button>
         <button type="button" class="btn-action-main" style="background: #dc2626; color: white;" onclick="detenerPlaylistMMT()">
           <span>⏹️</span> <span>DETENER</span>
         </button>
@@ -555,7 +556,7 @@
   <audio id="audioCornetaMMT" preload="auto" playsinline></audio>
 
   <script>
-    const APP_VERSION = 'v1792960312';
+    const APP_VERSION = 'v1792960577';
 
     // ==========================================
     // BASES DE DATOS TOTALES CON PAÍSES
@@ -1081,6 +1082,30 @@
           avanzarPlaylistPasoMMT();
         }
       }
+    }
+
+        function saltarSiguientePistaPlaylistMMT() {
+      const sel = document.getElementById('selPlaylistActiva');
+      const key = sel ? sel.value : 'lista_ejemplo';
+      const items = playlistsGuardadas[key] || [];
+      if (items.length === 0) return;
+
+      if (!playlistEnCurso) {
+        // Si no estaba iniciada, arranca en la siguiente o en la seleccionada
+        playlistEnCurso = true;
+        if (indicePistaSeleccionadaEnVentana >= 0 && indicePistaSeleccionadaEnVentana < items.length - 1) {
+          playlistIndexActual = indicePistaSeleccionadaEnVentana + 1;
+        } else {
+          playlistIndexActual = (playlistIndexActual + 1) % items.length;
+        }
+      } else {
+        playlistIndexActual++;
+        if (playlistIndexActual >= items.length) {
+          detenerPlaylistMMT();
+          return;
+        }
+      }
+      ejecutarItemPlaylistIndex(key, playlistIndexActual);
     }
 
     function avanzarPlaylistPasoMMT() {
