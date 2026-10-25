@@ -58,8 +58,8 @@
       position: relative; overflow: hidden;
     }
     .card-block-1 { border-top: 3.5px solid #38bdf8; }
-    .card-block-2 { border-top: 3.5px solid #60a5fa; }
-    .card-block-3 { border-top: 3.5px solid #34d399; }
+    .card-block-2 { border-top: 3.5px solid #38bdf8; }
+    .card-block-3 { border-top: 3.5px solid #38bdf8; }
     .card-title {
       font-size: 13px; font-weight: 800; color: #38bdf8; text-transform: uppercase;
       letter-spacing: 0.5px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;
@@ -555,7 +555,7 @@
   <audio id="audioCornetaMMT" preload="auto" playsinline></audio>
 
   <script>
-    const APP_VERSION = 'v1792959999';
+    const APP_VERSION = 'v1792960312';
 
     // ==========================================
     // BASES DE DATOS TOTALES CON PAÍSES
@@ -740,13 +740,16 @@
     }
 
     // ==========================================
-    // CANAL 1: BANDA DE MÚSICA (TOTALMENTE AUTÓNOMO)
-    // ==========================================
-    audioBanda.onended = () => {
-      onBandaFin();
-      if (playlistEnCurso) avanzarPlaylistPasoMMT();
+    // CANAL 1: BANDA DE MÚSICA (ROBUSTO CON URL DIRECTA Y FALLBACK)
+    let bandaReproduciendo = false;
+
+    audioBanda.onplaying = () => {
+      bandaReproduciendo = true;
+      const statusBox = document.getElementById('statusBandaMMT');
+      if (statusBox) statusBox.style.display = 'flex';
     };
-    audioBanda.onerror = () => {
+
+    audioBanda.onended = () => {
       onBandaFin();
       if (playlistEnCurso) avanzarPlaylistPasoMMT();
     };
@@ -759,41 +762,36 @@
       playBandaAudioItem(itemMusicaSeleccionado);
     }
 
-        function playBandaAudioItem(item) {
+    function playBandaAudioItem(item) {
       stopBandaMMT();
+
       const statusBox = document.getElementById('statusBandaMMT');
       const statusText = document.getElementById('statusBandaTextMMT');
       if (statusBox) statusBox.style.display = 'flex';
       if (statusText) statusText.textContent = '🎺 ' + item.nombre;
 
-      let intentoRemoto = false;
+      bandaReproduciendo = true;
+
+      // Determinar la mejor fuente de audio: si tiene urlRemota y no es una de las pistas locales conocidas, usar urlRemota directamente
+      let sourceUrl = item.archivo;
+      if (item.urlRemota) {
+        // Si es de anthems o musicamilitaresp remota, usar la URL remota directa para evitar el 404 local
+        sourceUrl = item.urlRemota;
+      }
 
       audioBanda.onerror = (e) => {
-        if (!intentoRemoto && item.urlRemota && audioBanda.src !== item.urlRemota) {
-          intentoRemoto = true;
-          audioBanda.src = item.urlRemota;
-          audioBanda.currentTime = 0;
+        console.warn('Error en fuente principal, intentando alternativa...', e);
+        if (sourceUrl !== item.archivo && item.archivo) {
+          audioBanda.src = item.archivo;
           audioBanda.play().catch(err => {
-            console.error('Fallo reproduccion remota banda:', err);
+            console.error('Error final reproduciendo:', err);
             onBandaFin();
             if (playlistEnCurso) avanzarPlaylistPasoMMT();
           });
-          return;
-        }
-        console.error('Error definitivo reproductor banda:', e);
-        onBandaFin();
-        if (playlistEnCurso) avanzarPlaylistPasoMMT();
-      };
-
-      audioBanda.src = item.archivo;
-      audioBanda.currentTime = 0;
-      audioBanda.play().catch(err => {
-        if (!intentoRemoto && item.urlRemota) {
-          intentoRemoto = true;
+        } else if (sourceUrl !== item.urlRemota && item.urlRemota) {
           audioBanda.src = item.urlRemota;
-          audioBanda.currentTime = 0;
-          audioBanda.play().catch(e => {
-            console.error('Fallo play remoto:', e);
+          audioBanda.play().catch(err => {
+            console.error('Error final remoto:', err);
             onBandaFin();
             if (playlistEnCurso) avanzarPlaylistPasoMMT();
           });
@@ -801,42 +799,26 @@
           onBandaFin();
           if (playlistEnCurso) avanzarPlaylistPasoMMT();
         }
+      };
+
+      audioBanda.src = sourceUrl;
+      audioBanda.currentTime = 0;
+      audioBanda.play().catch(err => {
+        // En móviles o por cambio de src, si falla el primer play, esperar al onerror o reintentar
+        console.warn('Play pendiente de carga:', err);
       });
     }
 
     function stopBandaMMT() {
+      bandaReproduciendo = false;
       try { audioBanda.pause(); audioBanda.currentTime = 0; } catch(e){}
       onBandaFin();
     }
 
     function onBandaFin() {
+      bandaReproduciendo = false;
       const statusBox = document.getElementById('statusBandaMMT');
       if (statusBox) statusBox.style.display = 'none';
-    }
-
-    function addMusicaSeleccionadaAPlaylistMMT() {
-      if (!itemMusicaSeleccionado) {
-        alert('Seleccione un himno o marcha para añadirlo a la lista de reproducción.');
-        return;
-      }
-      const sel = document.getElementById('selPlaylistActiva');
-      const key = sel ? sel.value : 'lista_ejemplo';
-      if (!playlistsGuardadas[key]) playlistsGuardadas[key] = [];
-      playlistsGuardadas[key].push({
-        tipo: 'musica',
-        id: itemMusicaSeleccionado.id,
-        nombre: itemMusicaSeleccionado.nombre
-      });
-      guardarListaActualMMT(true);
-      renderVentanaPlaylistMMT();
-    }
-
-    function verLetraMusicaSeleccionadaMMT() {
-      if (!itemMusicaSeleccionado || !itemMusicaSeleccionado.letraId || !LETRAS_DB[itemMusicaSeleccionado.letraId]) {
-        alert('Esta pieza no dispone de letra oficial o escrita.');
-        return;
-      }
-      mostrarLetraModalMMT(itemMusicaSeleccionado.letraId);
     }
 
     // ==========================================

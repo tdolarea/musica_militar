@@ -1,4 +1,4 @@
-// SW Musica Militar Card Contrast v1792959999
+// SW Musica Militar Blue Borders and Fixed Banda v1792960312
 self.addEventListener('install', e => self.skipWaiting());
 self.addEventListener('activate', e => {
   e.waitUntil(
