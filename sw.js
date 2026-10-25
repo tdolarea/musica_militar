@@ -1,4 +1,4 @@
-// SW Musica Militar Clean Footer v1792959566
+// SW Musica Militar Fixed Playlist Fallback v1792959775
 self.addEventListener('install', e => self.skipWaiting());
 self.addEventListener('activate', e => {
   e.waitUntil(

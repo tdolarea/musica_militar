@@ -551,7 +551,7 @@
   <audio id="audioCornetaMMT" preload="auto" playsinline></audio>
 
   <script>
-    const APP_VERSION = 'v1792959566';
+    const APP_VERSION = 'v1792959775';
 
     // ==========================================
     // BASES DE DATOS TOTALES CON PAÍSES
@@ -755,24 +755,47 @@
       playBandaAudioItem(itemMusicaSeleccionado);
     }
 
-    function playBandaAudioItem(item) {
+        function playBandaAudioItem(item) {
       stopBandaMMT();
       const statusBox = document.getElementById('statusBandaMMT');
       const statusText = document.getElementById('statusBandaTextMMT');
       if (statusBox) statusBox.style.display = 'flex';
       if (statusText) statusText.textContent = '🎺 ' + item.nombre;
 
+      let intentoRemoto = false;
+
+      audioBanda.onerror = (e) => {
+        if (!intentoRemoto && item.urlRemota && audioBanda.src !== item.urlRemota) {
+          intentoRemoto = true;
+          audioBanda.src = item.urlRemota;
+          audioBanda.currentTime = 0;
+          audioBanda.play().catch(err => {
+            console.error('Fallo reproduccion remota banda:', err);
+            onBandaFin();
+            if (playlistEnCurso) avanzarPlaylistPasoMMT();
+          });
+          return;
+        }
+        console.error('Error definitivo reproductor banda:', e);
+        onBandaFin();
+        if (playlistEnCurso) avanzarPlaylistPasoMMT();
+      };
+
       audioBanda.src = item.archivo;
       audioBanda.currentTime = 0;
       audioBanda.play().catch(err => {
-        if (item.urlRemota) {
+        if (!intentoRemoto && item.urlRemota) {
+          intentoRemoto = true;
           audioBanda.src = item.urlRemota;
+          audioBanda.currentTime = 0;
           audioBanda.play().catch(e => {
-            console.error('Fallo remoto:', e);
+            console.error('Fallo play remoto:', e);
             onBandaFin();
+            if (playlistEnCurso) avanzarPlaylistPasoMMT();
           });
         } else {
           onBandaFin();
+          if (playlistEnCurso) avanzarPlaylistPasoMMT();
         }
       });
     }
