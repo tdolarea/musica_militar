@@ -28,7 +28,7 @@
 
     /* Canal Dual de Estado de Sonido */
     .dual-status-container {
-      position: sticky; top: 64px; z-index: 99; margin: 10px 12px 4px 12px; display: flex; flex-direction: column; gap: 6px;
+      position: sticky; top: 64px; z-index: 99; margin: 8px 12px 4px 12px; display: flex; flex-direction: column; gap: 6px;
     }
     .status-bar-channel {
       border-radius: 8px; padding: 10px 14px; display: none; align-items: center; justify-content: space-between;
@@ -64,7 +64,7 @@
       background: #1e3a8a; color: #93c5fd; font-size: 10px; padding: 3px 8px; border-radius: 10px; font-weight: 700;
     }
 
-    /* Etiquetas de categorías y desplegables */
+    /* Grupos de campos y selects */
     .field-group { margin-bottom: 10px; }
     .field-label { font-size: 11px; font-weight: 800; color: #cbd5e1; margin-bottom: 4px; display: flex; align-items: center; gap: 5px; text-transform: uppercase; }
     .custom-select {
@@ -74,7 +74,7 @@
     }
     .custom-select:focus, .custom-select.selected { border-color: #38bdf8; background: #0c4a6e; }
 
-    /* Barra común de botones para los 4 desplegables de música */
+    /* Botonera común para desplegables */
     .common-btn-bar {
       display: grid; grid-template-columns: 2fr 1.5fr 1.2fr; gap: 8px; margin-top: 14px; padding-top: 10px;
       border-top: 1px dashed #334155;
@@ -96,7 +96,7 @@
     .btn-play-corneta { background: linear-gradient(135deg, #b45309 0%, #78350f 100%); color: white; border: 1.5px solid #f59e0b; }
     .btn-add-corneta { background: #1e293b; color: #fbbf24; border: 1.5px solid #475569; }
 
-    /* Bloque 3: Playlists completas con reordenación y persistencia */
+    /* Playlists completas con reordenación y persistencia */
     .playlist-top-controls {
       display: flex; gap: 8px; margin-bottom: 10px;
     }
@@ -108,7 +108,6 @@
       background: #0284c7; border: none; color: white; padding: 8px 12px; border-radius: 8px;
       font-size: 12px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 4px;
     }
-    .btn-pl-small:active { transform: scale(0.96); }
 
     .playlist-window {
       background: #070d1e; border: 1.5px solid #1e3a8a; border-radius: 8px; padding: 8px;
@@ -134,7 +133,6 @@
       background: #334155; border: 1px solid #475569; color: white; padding: 6px 12px;
       border-radius: 6px; font-size: 12px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 4px;
     }
-    .btn-reorder:active { transform: scale(0.95); }
     .btn-del-item {
       background: #991b1b; border: 1px solid #ef4444; color: white; padding: 6px 12px;
       border-radius: 6px; font-size: 12px; font-weight: 800; cursor: pointer; margin-left: auto;
@@ -196,56 +194,83 @@
     <!-- BLOQUE 1: BANDA DE MÚSICA (4 DESPLEGABLES CON BOTONERA COMÚN) -->
     <div class="card">
       <div class="card-title">
-        <span>🎺 Bloque 1: Banda de Música</span>
+        <span>🎺 Bloque 1: Banda de Música (40 obras)</span>
         <span class="card-badge">Canal Banda</span>
       </div>
 
       <!-- Desplegable 1: Himnos Institucionales -->
       <div class="field-group">
-        <label class="field-label" for="selCatInstitucionales">🇪🇸 1. Himnos Institucionales</label>
+        <label class="field-label" for="selCatInstitucionales">🇪🇸 1. Himnos Institucionales (2)</label>
         <select id="selCatInstitucionales" class="custom-select" onchange="onMusicaSelectChange(this, 'institucionales')">
             <option value="">-- Seleccione Himno Institucional --</option>
-            <option value="m_espana_largo">Himno Nacional de España (Completo)</option>
-            <option value="m_espana_corto">Marcha Real (Versión Breve)</option>
+            <option value="mm_espaniacorto">Himno Nacional de España (Breve)</option>
+            <option value="mm_espanialargo">Himno Nacional de España (Completo)</option>
         </select>
       </div>
 
       <!-- Desplegable 2: Marchas Militares -->
       <div class="field-group">
-        <label class="field-label" for="selCatMarchas">🥁 2. Marchas Militares</label>
+        <label class="field-label" for="selCatMarchas">🥁 2. Marchas Militares (20)</label>
         <select id="selCatMarchas" class="custom-select" onchange="onMusicaSelectChange(this, 'marchas')">
             <option value="">-- Seleccione Marcha Militar --</option>
-            <option value="m_ganando_barlovento">Ganando Barlovento</option>
-            <option value="m_infantes">Marcha de Infantes</option>
-            <option value="m_san_marcial">San Marcial</option>
+            <option value="mm_bajoladobleaguila">Bajo La Doble Aguila</option>
+            <option value="mm_cantinera">Cantinera</option>
+            <option value="mm_elabanico">El abanico</option>
+            <option value="mm_elturuta">El turuta</option>
+            <option value="mm_elviejoalmirante">El viejo almirante</option>
+            <option value="mm_ganandobarlovento">Ganando Barlovento</option>
+            <option value="mm_heroina">Heroina</option>
+            <option value="mm_laorgiadorada">La Orgia Dorada</option>
+            <option value="mm_laguardiadealabarderos">La guardia de alabarderos</option>
+            <option value="mm_lavueltadelosvoluntarios">La vuelta de los voluntarios</option>
+            <option value="mm_lascorsarias">Las corsarias</option>
+            <option value="mm_losgenerales">Los Generales</option>
+            <option value="mm_losquintos">Los Quintos</option>
+            <option value="mm_marchadeinfantes">Marcha de infantes</option>
+            <option value="mm_maresyvientos">Mares y vientos</option>
+            <option value="mm_pasoligero">Paso ligero</option>
+            <option value="mm_proaalamar">Proa a la mar</option>
+            <option value="mm_sanmarcial">San Marcial</option>
+            <option value="mm_sanquintin">San Quintin</option>
+            <option value="mm_vuelostriunfales">Vuelos triunfales</option>
         </select>
       </div>
 
       <!-- Desplegable 3: Himnos de Armas y Cuerpos -->
       <div class="field-group">
-        <label class="field-label" for="selCatHimnos">⚔️ 3. Himnos de Armas y Cuerpos</label>
+        <label class="field-label" for="selCatHimnos">⚔️ 3. Himnos de Armas y Cuerpos (13)</label>
         <select id="selCatHimnos" class="custom-select" onchange="onMusicaSelectChange(this, 'himnos')">
             <option value="">-- Seleccione Himno de Arma / Cuerpo --</option>
-            <option value="h_armada">Himno de la Armada</option>
-            <option value="h_guardia_civil">Himno de la Guardia Civil</option>
-            <option value="h_ejercito_tierra">Himno del Ejército de Tierra</option>
-            <option value="h_aire">Himno del Ejército del Aire y del Espacio</option>
-            <option value="h_infanteria_marina">Marcha Heroica de Infantería de Marina</option>
+            <option value="mm_himnoartilleria">Himno de Artillería</option>
+            <option value="mm_himnocaballeria">Himno de Caballería</option>
+            <option value="mm_himnoinfanteria">Himno de Infantería</option>
+            <option value="mm_himnoinfmarina">Himno de Infantería de Marina</option>
+            <option value="mm_himnoingenieros">Himno de Ingenieros</option>
+            <option value="mm_himnoarmada">Himno de la Armada</option>
+            <option value="mm_himnobripac">Himno de la BRIPAC</option>
+            <option value="mm_himnoguardiacivil">Himno de la Guardia Civil</option>
+            <option value="mm_himnoguardiareal">Himno de la Guardia Real</option>
+            <option value="mm_himnolegion">Himno de la Legión</option>
+            <option value="mm_himnoume">Himno de la UME</option>
+            <option value="mm_himnoejercitoaireespacio">Himno del Ejército del Aire y del Espacio</option>
+            <option value="mm_legionariosdelaire">Legionarios del aire</option>
         </select>
       </div>
 
       <!-- Desplegable 4: Música Religiosa Militar -->
       <div class="field-group">
-        <label class="field-label" for="selCatReligiosa">✝️ 4. Música Religiosa Militar</label>
+        <label class="field-label" for="selCatReligiosa">✝️ 4. Música Religiosa Militar (5)</label>
         <select id="selCatReligiosa" class="custom-select" onchange="onMusicaSelectChange(this, 'religiosa')">
             <option value="">-- Seleccione Música Religiosa --</option>
-            <option value="r_muerte_final">La Muerte no es el Final</option>
-            <option value="r_oracion">Oración de la Noche</option>
-            <option value="r_salve">Salve Marinera</option>
+            <option value="mm_lamuertenoeselfinal">La muerte no es el final</option>
+            <option value="mm_noviodelamuerte">Novio de la muerte</option>
+            <option value="mm_oracion">Oracion</option>
+            <option value="mm_oraciondelanoche">Oracion de la Noche</option>
+            <option value="mm_salvemarinera">Salve Marinera</option>
         </select>
       </div>
 
-      <!-- BOTONERA COMÚN UNIFICADA PARA LOS CUATRO DESPLEGABLES -->
+      <!-- BOTONERA COMÚN UNIFICADA -->
       <div class="common-btn-bar">
         <button type="button" id="btnPlayBandaCommon" class="btn-action-main btn-play-banda" onclick="playMusicaSeleccionadaMMT()">
           <span>▶️</span> <span>PLAY</span>
@@ -262,7 +287,7 @@
     <!-- BLOQUE 2: TOQUES DE CORNETA (DESPLEGABLE + BOTONERA DEBAJO) -->
     <div class="card">
       <div class="card-title">
-        <span>📯 Bloque 2: Toques de Corneta</span>
+        <span>📯 Bloque 2: Toques de Corneta (25 toques)</span>
         <span class="card-badge" style="background: #78350f; color: #fef3c7;">Canal Corneta</span>
       </div>
 
@@ -270,26 +295,31 @@
         <label class="field-label" for="selCorneta">Toques Reglamentarios de Ordenanza</label>
         <select id="selCorneta" class="custom-select">
             <option value="">-- Seleccione Toque de Corneta --</option>
-            <option value="c_alto">Alto</option>
-            <option value="c_atencion">Atención</option>
-            <option value="c_cambiohombro">Cambio de hombro</option>
-            <option value="c_cubrir">Cubrir</option>
-            <option value="c_defrente">De frente</option>
-            <option value="c_derecha">Derecha</option>
-            <option value="c_descanso">Descanso</option>
-            <option value="c_discrecion">Discreción</option>
-            <option value="c_findiscrecion">Fin de discreción</option>
-            <option value="c_firmes">Firmes</option>
-            <option value="c_izquierda">Izquierda</option>
-            <option value="c_llamadamandos">Llamada de mandos</option>
-            <option value="c_mediavuelta">Media vuelta</option>
-            <option value="c_pasofuneral">Paso funeral</option>
-            <option value="c_pasoligero">Paso ligero</option>
-            <option value="c_presenten">Presenten armas</option>
-            <option value="c_rancho">Rancho</option>
-            <option value="c_silencio">Silencio</option>
-            <option value="c_sobrehombro">Sobre el hombro</option>
-            <option value="c_oracion">Toque de Oración</option>
+            <option value="co_alto">Alto</option>
+            <option value="co_armen">Armen armas</option>
+            <option value="co_atencion">Atencion</option>
+            <option value="co_cambiodehombro">Cambio De Hombro</option>
+            <option value="co_cubrirse">Cubrirse</option>
+            <option value="co_defrente">De frente</option>
+            <option value="co_defrentepasofunerala">De frente Paso Funerala</option>
+            <option value="co_defrentepasoligero">De frente Paso Ligero</option>
+            <option value="co_derecha">Derecha</option>
+            <option value="co_descanso">Descanso</option>
+            <option value="co_diana">Diana</option>
+            <option value="co_discreccion">Discreccion</option>
+            <option value="co_findiscreccion">Fin Discreccion</option>
+            <option value="co_firmes">Firmes</option>
+            <option value="co_firmesautoridadprincipal">Firmes Autoridad Principal</option>
+            <option value="co_himnomacional">Himno Nacional a Corneta</option>
+            <option value="co_izquierda">Izquierda</option>
+            <option value="co_llamadageneral">Llamada General</option>
+            <option value="co_llamadamandos">Llamada Mandos</option>
+            <option value="co_mediavueltaar">Media Vuelta Ar</option>
+            <option value="co_presentenarmas">Presenten armas</option>
+            <option value="co_retreta">Retreta</option>
+            <option value="co_sobreelhombro">Sobre El Hombro</option>
+            <option value="co_sobreelhombroderecho">Sobre El Hombro Derecho</option>
+            <option value="co_oracioncorneta">Toque de Oración</option>
         </select>
       </div>
 
@@ -369,33 +399,32 @@
   <audio id="audioCornetaMMT" preload="auto" playsinline></audio>
 
   <script>
-    const APP_VERSION = 'v1792957186';
+    const APP_VERSION = 'v1792957467';
 
     // ==========================================
-    // BASES DE DATOS
+    // BASES DE DATOS TOTALES
     // ==========================================
-    const TODAS_MUSICAS = [{"id": "m_espana_largo", "nombre": "Himno Nacional de España (Completo)", "archivo": "audio/Espania_largo.mp3", "letraId": "himno_nacional"}, {"id": "m_espana_corto", "nombre": "Marcha Real (Versión Breve)", "archivo": "audio/Espania_corto.mp3", "letraId": "himno_nacional"}, {"id": "m_infantes", "nombre": "Marcha de Infantes", "archivo": "audio/MarchadeInfantes.mp3", "letraId": null}, {"id": "m_san_marcial", "nombre": "San Marcial", "archivo": "audio/SanMarcial.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/honores/main/audio/SanMarcial.mp3", "letraId": null}, {"id": "m_ganando_barlovento", "nombre": "Ganando Barlovento", "archivo": "audio/GanandoBarlovento.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/honores/main/audio/GanandoBarlovento.mp3", "letraId": null}, {"id": "h_armada", "nombre": "Himno de la Armada", "archivo": "audio/HimnoArmada.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/honores/main/audio/HimnoArmada.mp3", "letraId": "himno_armada"}, {"id": "h_infanteria_marina", "nombre": "Marcha Heroica de Infantería de Marina", "archivo": "audio/HimnoInfanteriaMarina.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/honores/main/audio/HimnoInfanteriaMarina.mp3", "letraId": "himno_infanteria_marina"}, {"id": "h_ejercito_tierra", "nombre": "Himno del Ejército de Tierra", "archivo": "audio/HimnoEjercitoTierra.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/honores/main/audio/HimnoEjercitoTierra.mp3", "letraId": null}, {"id": "h_aire", "nombre": "Himno del Ejército del Aire y del Espacio", "archivo": "audio/HimnoAire.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/honores/main/audio/HimnoAire.mp3", "letraId": null}, {"id": "h_guardia_civil", "nombre": "Himno de la Guardia Civil", "archivo": "audio/HimnoGuardiaCivil.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/honores/main/audio/HimnoGuardiaCivil.mp3", "letraId": null}, {"id": "r_salve", "nombre": "Salve Marinera", "archivo": "audio/SalveMarinera.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/honores/main/audio/SalveMarinera.mp3", "letraId": "salve_marinera"}, {"id": "r_oracion", "nombre": "Oración de la Noche", "archivo": "audio/OraciondelaNoche.mp3", "letraId": "oracion_noche"}, {"id": "r_muerte_final", "nombre": "La Muerte no es el Final", "archivo": "audio/LaMuerteNoEsElFinal.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/honores/main/audio/LaMuerteNoEsElFinal.mp3", "letraId": "la_muerte_no_es_el_final"}];
-    const CORNETAS_DB = [{"id": "c_firmes", "nombre": "Firmes", "archivo": "audio/cornetafirmes.wav"}, {"id": "c_atencion", "nombre": "Atención", "archivo": "audio/ATENCION.mp3"}, {"id": "c_defrente", "nombre": "De frente", "archivo": "audio/DEFRENTE.mp3"}, {"id": "c_alto", "nombre": "Alto", "archivo": "audio/ALTO.mp3"}, {"id": "c_pasoligero", "nombre": "Paso ligero", "archivo": "audio/DEFRENTEPASOLIGERO.mp3"}, {"id": "c_pasofuneral", "nombre": "Paso funeral", "archivo": "audio/DEFRENTEPASOFUNERALA.mp3"}, {"id": "c_presenten", "nombre": "Presenten armas", "archivo": "audio/cornetapresentenarmas.wav"}, {"id": "c_sobrehombro", "nombre": "Sobre el hombro", "archivo": "audio/CORNETASOBREELHOMBRO.mp3"}, {"id": "c_cambiohombro", "nombre": "Cambio de hombro", "archivo": "audio/CAMBIODEHOMBRO.mp3"}, {"id": "c_descanso", "nombre": "Descanso", "archivo": "audio/Cornetadescanso.wav"}, {"id": "c_derecha", "nombre": "Derecha", "archivo": "audio/DERECHA.mp3"}, {"id": "c_izquierda", "nombre": "Izquierda", "archivo": "audio/IZQUIERDA.mp3"}, {"id": "c_mediavuelta", "nombre": "Media vuelta", "archivo": "audio/MEDIA_VUELTA.mp3"}, {"id": "c_cubrir", "nombre": "Cubrir", "archivo": "audio/CUBRIR.mp3"}, {"id": "c_discrecion", "nombre": "Discreción", "archivo": "audio/DISCRECCION.mp3"}, {"id": "c_findiscrecion", "nombre": "Fin de discreción", "archivo": "audio/FIN_DISCRECCION.mp3"}, {"id": "c_silencio", "nombre": "Silencio", "archivo": "audio/SILENCIO.mp3"}, {"id": "c_oracion", "nombre": "Toque de Oración", "archivo": "audio/CornetaToquedeOracion.wav"}, {"id": "c_llamadamandos", "nombre": "Llamada de mandos", "archivo": "audio/LLAMADA_MANDOS.mp3"}, {"id": "c_rancho", "nombre": "Rancho", "archivo": "audio/RANCHO.mp3"}];
-    const LETRAS_DB = {"salve_marinera": {"title": "Salve Marinera", "author": "Música: Cristóbal Oudrid | Letra: Mariano Méndez Vigo", "text": "¡Salve, Estrella de los mares,\nde los mares iris de eterna ventura!\n¡Salve, fénix de hermosura,\nMadre del Amor!\n¡Madre del Amor!\n\nA Ti, celestial Señora,\na Ti, dulce y limpia flor,\ncon el alma que Te adora,\npide la Armada su honor.\n\nDe tu piedad infinita\nalcanza para el marino,\nla gracia de tu cariño\ny el perdón de su Señor.\n\n¡Salve, Estrella de los mares!\n¡Salve, Estrella de los mares!\n¡Salve, Salve, Salve, Salve!"}, "oracion_noche": {"title": "Oración de la Noche", "author": "Tradición de la Armada Española", "text": "Tú que dispones de cielo y mar,\nhaces la calma y la tempestad,\nten de nosotros piedad, Señor,\nde los que vagan por el mar.\n\nTen de nosotros piedad, Señor,\nde los que vagan por el mar.\nGuarda sus vidas con tu poder,\nguía sus pasos al bien y al deber.\nDales la paz y la libertad,\nguárdalos siempre en tu bondad.\n\nAmén."}, "himno_infanteria_marina": {"title": "Marcha Heroica de Infantería de Marina", "author": "Música: Cándido R. Landache | Letra: José Mª Pemán", "text": "Infantes de Marina, marchemos a luchar,\nla Patria nos encarga las glorias de su mar.\nTriunfar o morir, por España pelear,\nque el honor de España es vencer o morir.\n\nPor la Cruz y por España,\nlucharemos con valor,\ny en la tierra y en el mar,\nla victoria brillará.\n\n¡Viva España! ¡Viva el Rey!\n¡Honor y Gloria a la Infantería de Marina!"}, "himno_armada": {"title": "Himno de la Armada", "author": "Armada Española", "text": "Marineros de España cantemos,\na la Patria con gozo y honor,\ny la enseña bendita juremos,\ndefender con orgullo y valor.\n\nPor los mares surcados de gloria,\nnuestras quillas supieron vencer,\ny en el libro inmortal de la historia,\nnuestro lema es triunfar o perder.\n\n¡Viva España! ¡Viva la Armada!"}, "himno_nacional": {"title": "Marcha Real (Himno Nacional)", "author": "Tradición / Letra histórica (José Mª Pemán)", "text": "¡Viva España! Alzad los brazos, hijos\ndel pueblo español,\nque vuelve a resurgir.\n\nGloria a la Patria que supo seguir,\nsobre el azul del mar el caminar del sol.\n\n¡Triunfa, España! Los yunques y las ruedas\ncanten al compás\ndel himno de la fe.\n\nJuntos con ellos cantemos de pie\nla vida nueva y fuerte de trabajo y paz."}, "la_muerte_no_es_el_final": {"title": "La Muerte no es el Final", "author": "Música y Letra: Cesáreo Gabaráin", "text": "Tú nos dijiste que la muerte\nno es el final del camino,\nque aunque de nuevo el cuerpo vuelva\na ser polvo en el polvo,\nel alma vivirá contigo.\n\nCuando la pena nos alcanza\npor un hermano perdido,\ncuando el adiós dolorido\nbusca en la fe su esperanza,\nen Tu palabra confiamos\ncon la certeza de hijos:\nque ya descanse en la gloria\nel que en la tierra ha servido."}};
+    const TODAS_MUSICAS = [{"id": "mm_espaniacorto", "nombre": "Himno Nacional de España (Breve)", "archivo": "audio/Espania_corto.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Espania_corto.mp3", "letraId": "himno_nacional"}, {"id": "mm_espanialargo", "nombre": "Himno Nacional de España (Completo)", "archivo": "audio/Espania_largo.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Espania_largo.mp3", "letraId": "himno_nacional"}, {"id": "mm_bajoladobleaguila", "nombre": "Bajo La Doble Aguila", "archivo": "audio/Bajo La Doble Aguila.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Bajo%20La%20Doble%20Aguila.mp3", "letraId": null}, {"id": "mm_cantinera", "nombre": "Cantinera", "archivo": "audio/Cantinera.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Cantinera.mp3", "letraId": "cantinera"}, {"id": "mm_elabanico", "nombre": "El abanico", "archivo": "audio/El abanico.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/El%20abanico.mp3", "letraId": null}, {"id": "mm_elturuta", "nombre": "El turuta", "archivo": "audio/El turuta.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/El%20turuta.mp3", "letraId": null}, {"id": "mm_elviejoalmirante", "nombre": "El viejo almirante", "archivo": "audio/El viejo almirante.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/El%20viejo%20almirante.mp3", "letraId": null}, {"id": "mm_ganandobarlovento", "nombre": "Ganando Barlovento", "archivo": "audio/Ganando Barlovento.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Ganando%20Barlovento.mp3", "letraId": null}, {"id": "mm_heroina", "nombre": "Heroina", "archivo": "audio/Heroina.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Heroina.mp3", "letraId": null}, {"id": "mm_laorgiadorada", "nombre": "La Orgia Dorada", "archivo": "audio/La Orgia Dorada.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/La%20Orgia%20Dorada.mp3", "letraId": null}, {"id": "mm_laguardiadealabarderos", "nombre": "La guardia de alabarderos", "archivo": "audio/La guardia de alabarderos.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/La%20guardia%20de%20alabarderos.mp3", "letraId": null}, {"id": "mm_lavueltadelosvoluntarios", "nombre": "La vuelta de los voluntarios", "archivo": "audio/La vuelta de los voluntarios.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/La%20vuelta%20de%20los%20voluntarios.mp3", "letraId": null}, {"id": "mm_lascorsarias", "nombre": "Las corsarias", "archivo": "audio/Las corsarias.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Las%20corsarias.mp3", "letraId": "lascorsarias"}, {"id": "mm_losgenerales", "nombre": "Los Generales", "archivo": "audio/Los Generales.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Los%20Generales.mp3", "letraId": null}, {"id": "mm_losquintos", "nombre": "Los Quintos", "archivo": "audio/Los Quintos.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Los%20Quintos.mp3", "letraId": null}, {"id": "mm_marchadeinfantes", "nombre": "Marcha de infantes", "archivo": "audio/Marcha de infantes.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Marcha%20de%20infantes.mp3", "letraId": null}, {"id": "mm_maresyvientos", "nombre": "Mares y vientos", "archivo": "audio/Mares y vientos.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Mares%20y%20vientos.mp3", "letraId": null}, {"id": "mm_pasoligero", "nombre": "Paso ligero", "archivo": "audio/Paso ligero.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Paso%20ligero.mp3", "letraId": null}, {"id": "mm_proaalamar", "nombre": "Proa a la mar", "archivo": "audio/Proa a la mar.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Proa%20a%20la%20mar.mp3", "letraId": null}, {"id": "mm_sanmarcial", "nombre": "San Marcial", "archivo": "audio/San Marcial.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/San%20Marcial.mp3", "letraId": null}, {"id": "mm_sanquintin", "nombre": "San Quintin", "archivo": "audio/San Quintin.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/San%20Quintin.mp3", "letraId": null}, {"id": "mm_vuelostriunfales", "nombre": "Vuelos triunfales", "archivo": "audio/Vuelos triunfales.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Vuelos%20triunfales.mp3", "letraId": null}, {"id": "mm_himnoarmada", "nombre": "Himno de la Armada", "archivo": "audio/Himno ARMADA.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Himno%20ARMADA.mp3", "letraId": "himno_armada"}, {"id": "mm_himnoartilleria", "nombre": "Himno de Artillería", "archivo": "audio/Himno ARTILLERIA.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Himno%20ARTILLERIA.mp3", "letraId": null}, {"id": "mm_himnobripac", "nombre": "Himno de la BRIPAC", "archivo": "audio/Himno BRIPAC.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Himno%20BRIPAC.mp3", "letraId": null}, {"id": "mm_himnocaballeria", "nombre": "Himno de Caballería", "archivo": "audio/Himno CABALLERIA.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Himno%20CABALLERIA.mp3", "letraId": null}, {"id": "mm_himnoejercitoaireespacio", "nombre": "Himno del Ejército del Aire y del Espacio", "archivo": "audio/Himno EJERCITO AIRE ESPACIO.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Himno%20EJERCITO%20AIRE%20ESPACIO.mp3", "letraId": null}, {"id": "mm_himnoguardiacivil", "nombre": "Himno de la Guardia Civil", "archivo": "audio/Himno GUARDIA CIVIL.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Himno%20GUARDIA%20CIVIL.mp3", "letraId": null}, {"id": "mm_himnoguardiareal", "nombre": "Himno de la Guardia Real", "archivo": "audio/Himno GUARDIA REAL.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Himno%20GUARDIA%20REAL.mp3", "letraId": null}, {"id": "mm_himnoinfmarina", "nombre": "Himno de Infantería de Marina", "archivo": "audio/Himno INF MARINA.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Himno%20INF%20MARINA.mp3", "letraId": "himno_infanteria_marina"}, {"id": "mm_himnoinfanteria", "nombre": "Himno de Infantería", "archivo": "audio/Himno INFANTERIA.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Himno%20INFANTERIA.mp3", "letraId": null}, {"id": "mm_himnoingenieros", "nombre": "Himno de Ingenieros", "archivo": "audio/Himno INGENIEROS.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Himno%20INGENIEROS.mp3", "letraId": null}, {"id": "mm_himnolegion", "nombre": "Himno de la Legión", "archivo": "audio/Himno LEGION.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Himno%20LEGION.mp3", "letraId": null}, {"id": "mm_himnoume", "nombre": "Himno de la UME", "archivo": "audio/Himno UME.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Himno%20UME.mp3", "letraId": null}, {"id": "mm_legionariosdelaire", "nombre": "Legionarios del aire", "archivo": "audio/Legionarios del aire.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Legionarios%20del%20aire.mp3", "letraId": null}, {"id": "mm_lamuertenoeselfinal", "nombre": "La muerte no es el final", "archivo": "audio/La muerte no es el final.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/La%20muerte%20no%20es%20el%20final.mp3", "letraId": "la_muerte_no_es_el_final"}, {"id": "mm_noviodelamuerte", "nombre": "Novio de la muerte", "archivo": "audio/Novio de la muerte.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Novio%20de%20la%20muerte.mp3", "letraId": "la_muerte_no_es_el_final"}, {"id": "mm_oraciondelanoche", "nombre": "Oracion de la Noche", "archivo": "audio/Oracion de la Noche.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Oracion%20de%20la%20Noche.mp3", "letraId": "oracion_noche"}, {"id": "mm_oracion", "nombre": "Oracion", "archivo": "audio/Oracion.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Oracion.mp3", "letraId": "oracion_noche"}, {"id": "mm_salvemarinera", "nombre": "Salve Marinera", "archivo": "audio/Salve Marinera.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/musicamilitaresp/main/Salve%20Marinera.mp3", "letraId": "salve_marinera"}];
+    const CORNETAS_DB = [{"id": "co_alto", "nombre": "Alto", "archivo": "audio/ALTO.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/ALTO.mp3"}, {"id": "co_armen", "nombre": "Armen armas", "archivo": "audio/ARMEN.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/ARMEN.mp3"}, {"id": "co_atencion", "nombre": "Atencion", "archivo": "audio/ATENCION.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/ATENCION.mp3"}, {"id": "co_cambiodehombro", "nombre": "Cambio De Hombro", "archivo": "audio/CAMBIO DE HOMBRO.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/CAMBIO%20DE%20HOMBRO.mp3"}, {"id": "co_cubrirse", "nombre": "Cubrirse", "archivo": "audio/CUBRIRSE.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/CUBRIRSE.mp3"}, {"id": "co_defrentepasofunerala", "nombre": "De frente Paso Funerala", "archivo": "audio/DEFRENTE PASO FUNERALA.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/DEFRENTE%20PASO%20FUNERALA.mp3"}, {"id": "co_defrentepasoligero", "nombre": "De frente Paso Ligero", "archivo": "audio/DEFRENTE PASO LIGERO.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/DEFRENTE%20PASO%20LIGERO.mp3"}, {"id": "co_defrente", "nombre": "De frente", "archivo": "audio/DEFRENTE.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/DEFRENTE.mp3"}, {"id": "co_derecha", "nombre": "Derecha", "archivo": "audio/DERECHA.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/DERECHA.mp3"}, {"id": "co_descanso", "nombre": "Descanso", "archivo": "audio/DESCANSO.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/DESCANSO.mp3"}, {"id": "co_diana", "nombre": "Diana", "archivo": "audio/DIANA.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/DIANA.mp3"}, {"id": "co_discreccion", "nombre": "Discreccion", "archivo": "audio/DISCRECCION.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/DISCRECCION.mp3"}, {"id": "co_findiscreccion", "nombre": "Fin Discreccion", "archivo": "audio/FIN_DISCRECCION.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/FIN_DISCRECCION.mp3"}, {"id": "co_firmesautoridadprincipal", "nombre": "Firmes Autoridad Principal", "archivo": "audio/FIRMES AUTORIDAD PRINCIPAL.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/FIRMES%20AUTORIDAD%20PRINCIPAL.mp3"}, {"id": "co_firmes", "nombre": "Firmes", "archivo": "audio/FIRMES.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/FIRMES.mp3"}, {"id": "co_himnomacional", "nombre": "Himno Nacional a Corneta", "archivo": "audio/HIMNOMACIONAL.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/HIMNOMACIONAL.mp3"}, {"id": "co_izquierda", "nombre": "Izquierda", "archivo": "audio/IZQUIERDA.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/IZQUIERDA.mp3"}, {"id": "co_llamadageneral", "nombre": "Llamada General", "archivo": "audio/LLAMADA GENERAL.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/LLAMADA%20GENERAL.mp3"}, {"id": "co_llamadamandos", "nombre": "Llamada Mandos", "archivo": "audio/LLAMADA_MANDOS.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/LLAMADA_MANDOS.mp3"}, {"id": "co_mediavueltaar", "nombre": "Media Vuelta Ar", "archivo": "audio/MEDIA_VUELTA_AR.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/MEDIA_VUELTA_AR.mp3"}, {"id": "co_oracioncorneta", "nombre": "Toque de Oración", "archivo": "audio/ORACION_CORNETA.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/ORACION_CORNETA.mp3"}, {"id": "co_presentenarmas", "nombre": "Presenten armas", "archivo": "audio/PRESENTEN_ARMAS.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/PRESENTEN_ARMAS.mp3"}, {"id": "co_retreta", "nombre": "Retreta", "archivo": "audio/RETRETA.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/RETRETA.mp3"}, {"id": "co_sobreelhombroderecho", "nombre": "Sobre El Hombro Derecho", "archivo": "audio/SOBRE EL HOMBRO DERECHO.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/SOBRE%20EL%20HOMBRO%20DERECHO.mp3"}, {"id": "co_sobreelhombro", "nombre": "Sobre El Hombro", "archivo": "audio/SOBRE EL HOMBRO.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/cornetas/main/SOBRE%20EL%20HOMBRO.mp3"}];
+    const LETRAS_DB = {"salve_marinera": {"title": "Salve Marinera", "author": "Música: Cristóbal Oudrid | Letra: Mariano Méndez Vigo", "text": "¡Salve, Estrella de los mares,\nde los mares iris de eterna ventura!\n¡Salve, fénix de hermosura,\nMadre del Amor!\n¡Madre del Amor!\n\nA Ti, celestial Señora,\na Ti, dulce y limpia flor,\ncon el alma que Te adora,\npide la Armada su honor.\n\nDe tu piedad infinita\nalcanza para el marino,\nla gracia de tu cariño\ny el perdón de su Señor.\n\n¡Salve, Estrella de los mares!\n¡Salve, Estrella de los mares!\n¡Salve, Salve, Salve, Salve!"}, "oracion_noche": {"title": "Oración de la Noche", "author": "Tradición de la Armada Española", "text": "Tú que dispones de cielo y mar,\nhaces la calma y la tempestad,\nten de nosotros piedad, Señor,\nde los que vagan por el mar.\n\nTen de nosotros piedad, Señor,\nde los que vagan por el mar.\nGuarda sus vidas con tu poder,\nguía sus pasos al bien y al deber.\nDales la paz y la libertad,\nguárdalos siempre en tu bondad.\n\nAmén."}, "himno_infanteria_marina": {"title": "Marcha Heroica de Infantería de Marina", "author": "Música: Cándido R. Landache | Letra: José Mª Pemán", "text": "Infantes de Marina, marchemos a luchar,\nla Patria nos encarga las glorias de su mar.\nTriunfar o morir, por España pelear,\nque el honor de España es vencer o morir.\n\nPor la Cruz y por España,\nlucharemos con valor,\ny en la tierra y en el mar,\nla victoria brillará.\n\n¡Viva España! ¡Viva el Rey!\n¡Honor y Gloria a la Infantería de Marina!"}, "himno_armada": {"title": "Himno de la Armada", "author": "Armada Española", "text": "Marineros de España cantemos,\na la Patria con gozo y honor,\ny la enseña bendita juremos,\ndefender con orgullo y valor.\n\nPor los mares surcados de gloria,\nnuestras quillas supieron vencer,\ny en el libro inmortal de la historia,\nnuestro lema es triunfar o perder.\n\n¡Viva España! ¡Viva la Armada!"}, "himno_nacional": {"title": "Marcha Real (Himno Nacional)", "author": "Tradición / Letra histórica (José Mª Pemán)", "text": "¡Viva España! Alzad los brazos, hijos\ndel pueblo español,\nque vuelve a resurgir.\n\nGloria a la Patria que supo seguir,\nsobre el azul del mar el caminar del sol.\n\n¡Triunfa, España! Los yunques y las ruedas\ncanten al compás\ndel himno de la fe.\n\nJuntos con ellos cantemos de pie\nla vida nueva y fuerte de trabajo y paz."}, "la_muerte_no_es_el_final": {"title": "La Muerte no es el Final", "author": "Música y Letra: Cesáreo Gabaráin", "text": "Tú nos dijiste que la muerte\nno es el final del camino,\nque aunque de nuevo el cuerpo vuelva\na ser polvo en el polvo,\nel alma vivirá contigo.\n\nCuando la pena nos alcanza\npor un hermano perdido,\ncuando el adiós dolorido\nbusca en la fe su esperanza,\nen Tu palabra confiamos\ncon la certeza de hijos:\nque ya descanse en la gloria\nel que en la tierra ha servido."}, "cantinera": {"title": "La Cantinera", "author": "Tradición militar", "text": "Hoy aquí en tierra\r\nmañana en la mar\r\nlistos a zarpar.\r\n\r\nEn paz o en guerra\r\nen calma o en tormenta\r\nhay que navegar.\r\n\r\nEcha cantinera\r\nvino para todos\r\nquién sabe si cualquiera\r\nde los que aquí estamos\r\nnunca volverá.\r\n\r\nEl ancla zarpó avante\r\nlas dos rumbo\r\nhacia alta mar.\r\n\r\nDime serviola\r\nsi aún en el muelle\r\na mi novia ves llorar.\r\n\r\nDéjala que llore\r\nqué me importa su llanto\r\nsi a pocas singladuras\r\ncuando atraquemos\r\notra encontrarás."}, "lascorsarias": {"title": "Las Corsarias (Banderita)", "author": "Tradición militar", "text": "Allá por la tierra mora,\r\nallá por tierra africana,\r\nun soldadito español,\r\nde esta manera cantaba:\r\n\r\nComo el fino de Jerez,\r\ny el tintillo de Rioja,\r\nson los colores que tiene\r\nla Banderita Española,\r\nla Banderita Española.\r\n\r\nCuando estoy en tierra extraña\r\ny contemplo tus colores\r\ny me acuerdo de mi España,\r\nmira si yo te querré.\r\n\r\nComo el fino de Jerez,\r\ny el tintillo de Rioja,\r\nson los colores que tiene\r\nla Banderita Española,\r\nla Banderita Española.\r\n\r\nBanderita tu eres roja,\r\nBanderita tu eres gualda,\r\nllevas sangre, llevas oro\r\nen el fondo de tu alma.\r\n\r\nY el día que yo me muera,\r\nsi estoy lejos de mi Patria\r\nsólo quiero que me cubran\r\ncon la Bandera de España.\r\n\r\nBanderita tu eres roja,\r\nBanderita tu eres gualda,\r\nllevas sangre, llevas oro\r\nen el fondo de tu alma.\r\n\r\nY el día que yo me muera,\r\nsi estoy lejos de mi Patria\r\n¡Sólo quiero que me cubran\r\ncon la Bandera de España!"}, "noviodelamuerte": {"title": "El Novio de la Muerte", "author": "Tradición militar", "text": "Nadie en el Tercio sabía\r\nquien era aquel legionario\r\ntan audaz y temerario\r\nque a la Legión se alistó.\r\n\r\nNadie sabía su historia\r\nmás la Legión suponía\r\nque un gran dolor le mordía\r\ncomo un lobo el corazón.\r\n\r\nMás si alguno quién era le preguntaba\r\ncon dolor y rureza le contestaba:\r\n\r\nSoy un hombre a quien la suerte\r\nhirió con zarpa de fiera\r\nsoy un novio de la muerte\r\nque va a unirse en lazo fuerte\r\ncon tan leal compañera.\r\n\r\nCuando más rudo era el fuego\r\ny la pelea más fiera\r\ndefendiendo su Bandera\r\nel legionario avanzó.\r\n\r\nY sin temer al empuje\r\ndel enemigo exaltado\r\nsupo morir como un bravo\r\ny la Enseña rescató.\r\n\r\nY al regar con su sangre la tierra ardiente\r\nmurmuró el legionario con voz doliente:\r\n\r\nSoy un hombre a quien la suerte\r\nhirió con zarpa de fiera\r\nsoy un novio de la muerte\r\nque va a unirse en lazo fuerte\r\ncon tan leal compañera.\r\n\r\nCuando al fin le recogieron\r\nentre su pecho encontraron\r\nuna carta y un retrato\r\nde una divina mujer.\r\n\r\nAquella carta decía:\r\n“Si algún día Dios te llama\r\npara mí un puesto reclama\r\nque a buscarte pronto iré.”\r\n\r\nY en el último verso que le enviaba,\r\nsu postrer despedida le consagraba:\r\n\r\n“Por ir a tu lado a verte,\r\nmi más leal compañera,\r\nme hice novio de la muerte,\r\nla estreché con lazo fuerte\r\n\r\ny su amor fue mi ¡Bandera!”"}, "oraciondelanoche": {"title": "Oración de la Noche", "author": "Tradición militar", "text": "Tú que dispones\r\nde viento y mar,\r\nhaces la calma,\r\nla tempestad.\r\nTen de nosotros Señor,\r\npiedad,\r\npiedad, Señor,\r\nSeñor, piedad."}, "salvemarinera": {"title": "Salve Marinera", "author": "Tradición militar", "text": "Salve Marinera\r\nSalve, Estrella de los mares,\r\nde los mares iris, de eterna ventura.\r\nSalve,  oh! F nix de hermosura\r\nMadre del divino amor.\r\n\r\nDe tu pueblo, a los pesares\r\ntu clemencia de consuelo.\r\nFervoroso llegue al cielo y hasta Ti,\r\ny hasta Ti, nuestro clamor.\r\n\r\nSalve, salve, Estrella de los mares.\r\nSalve, Estrella de los mares.\r\nS , fervoroso llegue al cielo, y hasta Ti,\r\ny hasta Ti, nuestro clamor.\r\n\r\nSalve, salve Estrella de los mares,\r\nEstrella de los mares,\r\nsalve, salve, salve, salve."}};
 
     // REPRODUCTORES DUALES
     const audioBanda = document.getElementById('audioBandaMMT');
     const audioCorneta = document.getElementById('audioCornetaMMT');
 
     let itemMusicaSeleccionado = null;
-    let itemCornetaSeleccionado = null;
 
     // ESTADO DE PLAYLISTS
     let indicePistaSeleccionadaEnVentana = -1;
     let playlistsGuardadas = {
       "desfile_standard": [
-        {"tipo": "corneta", "id": "c_atencion", "nombre": "Atención"},
-        {"tipo": "corneta", "id": "c_firmes", "nombre": "Firmes"},
-        {"tipo": "corneta", "id": "c_defrente", "nombre": "De frente"},
-        {"tipo": "musica", "id": "m_infantes", "nombre": "Marcha de Infantes"},
-        {"tipo": "corneta", "id": "c_alto", "nombre": "Alto"},
-        {"tipo": "corneta", "id": "c_presenten", "nombre": "Presenten armas"},
-        {"tipo": "musica", "id": "m_espana_largo", "nombre": "Himno Nacional de España (Completo)"}
+        {"tipo": "corneta", "id": "co_atencion", "nombre": "Atención"},
+        {"tipo": "corneta", "id": "co_firmes", "nombre": "Firmes"},
+        {"tipo": "corneta", "id": "co_defrente", "nombre": "De frente"},
+        {"tipo": "musica", "id": "mm_marchadeinfantes", "nombre": "Marcha de infantes"},
+        {"tipo": "corneta", "id": "co_alto", "nombre": "Alto"},
+        {"tipo": "corneta", "id": "co_presentenarmas", "nombre": "Presenten armas"},
+        {"tipo": "musica", "id": "mm_espaniacompleto", "nombre": "Himno Nacional de España (Completo)"}
       ]
     };
     let playlistEnCurso = false;
@@ -446,8 +475,12 @@
       if (itemMusicaSeleccionado && itemMusicaSeleccionado.letraId && LETRAS_DB[itemMusicaSeleccionado.letraId]) {
         btnL.style.opacity = '1';
         btnL.style.pointerEvents = 'auto';
+        btnL.style.borderColor = '#38bdf8';
+        btnL.style.color = '#38bdf8';
       } else {
         btnL.style.opacity = '0.5';
+        btnL.style.borderColor = '#475569';
+        btnL.style.color = '#94a3b8';
       }
     }
 
@@ -484,7 +517,7 @@
         if (item.urlRemota) {
           audioBanda.src = item.urlRemota;
           audioBanda.play().catch(e => {
-            alert('Audio descargable bajo demanda: ' + item.nombre);
+            console.error('Fallo remoto:', e);
             onBandaFin();
           });
         } else {
@@ -561,8 +594,12 @@
       audioCorneta.src = item.archivo;
       audioCorneta.currentTime = 0;
       audioCorneta.play().catch(e => {
-        console.error('Error corneta:', e);
-        onCornetaFin();
+        if (item.urlRemota) {
+          audioCorneta.src = item.urlRemota;
+          audioCorneta.play().catch(err => onCornetaFin());
+        } else {
+          onCornetaFin();
+        }
       });
     }
 
