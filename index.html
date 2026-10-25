@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Honores de Ordenanza · Armada Española</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#070d1e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Honores">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="img/banderaespana.jpg">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; -webkit-tap-highlight-color: transparent; }
+    body { background: #070d1e; color: #f1f5f9; min-height: 100vh; display: flex; flex-direction: column; }
+    
+    header {
+      background: #0f172a; border-bottom: 2px solid #1e3a8a; padding: 12px 16px;
+      display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand img { width: 38px; height: 38px; border-radius: 6px; object-fit: cover; border: 1.5px solid #38bdf8; }
+    .brand-title { font-size: 15px; font-weight: 800; color: #38bdf8; line-height: 1.15; }
+    .brand-sub { font-size: 10px; color: #94a3b8; font-weight: 700; text-transform: uppercase; }
+
+    .nav-bar {
+      display: flex; background: #0b152d; border-bottom: 1px solid #1e3a8a; overflow-x: auto;
+      padding: 4px 8px; gap: 6px; -webkit-overflow-scrolling: touch;
+    }
+    .nav-btn {
+      background: transparent; border: none; color: #94a3b8; padding: 8px 12px; font-size: 11px;
+      font-weight: 800; border-radius: 6px; cursor: pointer; white-space: nowrap; text-transform: uppercase;
+    }
+    .nav-btn.active { background: #0284c7; color: white; box-shadow: 0 2px 6px rgba(2,132,199,0.4); }
+
+    main { flex: 1; padding: 14px; max-width: 800px; margin: 0 auto; width: 100%; }
+
+    .view-section { display: none; }
+    .view-section.active { display: block; }
+
+    .card {
+      background: #0f172a; border: 1px solid #1e3a8a; border-radius: 10px; padding: 14px; margin-bottom: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+    .card-title {
+      font-size: 13px; font-weight: 800; color: #38bdf8; text-transform: uppercase; margin-bottom: 10px;
+      display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #1e293b; padding-bottom: 6px;
+    }
+
+    .btn-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
+    @media (min-width: 480px) { .btn-grid { grid-template-columns: 1fr 1fr; } }
+
+    .action-btn {
+      background: #1e293b; border: 1.5px solid #334155; color: #f8fafc; padding: 12px 14px; border-radius: 8px;
+      font-size: 12.5px; font-weight: 800; cursor: pointer; text-align: left; display: flex; align-items: center;
+      justify-content: space-between; transition: 0.15s; min-height: 48px;
+    }
+    .action-btn:active { transform: scale(0.98); background: #0284c7; border-color: #38bdf8; }
+    .action-btn.danger { background: #450a0a; border-color: #ef4444; color: #fca5a5; }
+    .action-btn.danger:active { background: #dc2626; color: white; }
+    .action-btn.primary { background: #0c4a6e; border-color: #0284c7; color: #e0f2fe; }
+
+    .auth-select {
+      width: 100%; padding: 12px; background: #070d1e; border: 1.5px solid #0284c7; border-radius: 8px;
+      color: #f8fafc; font-size: 13.5px; font-weight: 700; margin-bottom: 12px; outline: none;
+    }
+
+    .status-bar {
+      background: #7f1d1d; border: 2px solid #ef4444; border-radius: 8px; padding: 12px 16px;
+      color: #fef2f2; font-size: 13px; font-weight: 800; margin-bottom: 14px; display: flex;
+      align-items: center; justify-content: space-between; box-shadow: 0 4px 15px rgba(239,68,68,0.4);
+      animation: pulseAlert 2s infinite;
+    }
+    @keyframes pulseAlert {
+      0% { border-color: #ef4444; }
+      50% { border-color: #f87171; }
+      100% { border-color: #ef4444; }
+    }
+    .status-bar-stop-btn {
+      background: #dc2626; border: 1.5px solid #fecaca; color: white; padding: 8px 16px;
+      border-radius: 6px; font-size: 13px; font-weight: 900; cursor: pointer; text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .status-bar-stop-btn:active { background: #991b1b; transform: scale(0.96); }
+
+    .action-btn.disabled {
+      opacity: 0.4; cursor: not-allowed; pointer-events: none; border-color: #334155; filter: grayscale(1);
+    }
+
+    .install-banner {
+      background: #1e3a8a; border: 1px solid #38bdf8; border-radius: 8px; padding: 10px 14px;
+      color: #e0f2fe; font-size: 11px; margin-bottom: 14px; display: flex; align-items: center;
+      justify-content: space-between; gap: 8px;
+    }
+
+    footer {
+      background: #070d1e; border-top: 1px solid #1e293b; padding: 12px; text-align: center;
+      font-size: 11px; color: #64748b; font-weight: 600;
+    }
+  
+    /* Switch toggle styles */
+    .toggle-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 12px; background: #070d1e; border: 1px solid #1e293b;
+      border-radius: 8px; margin-bottom: 8px;
+    }
+    .toggle-label { font-size: 13px; font-weight: 700; color: #f1f5f9; }
+    .toggle-desc { font-size: 11px; color: #94a3b8; font-weight: 500; }
+    .switch {
+      position: relative; display: inline-block; width: 44px; height: 24px; flex-shrink: 0;
+    }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #334155; transition: .2s; border-radius: 24px;
+    }
+    .slider:before {
+      position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px;
+      background-color: white; transition: .2s; border-radius: 50%;
+    }
+    input:checked + .slider { background-color: #0284c7; }
+    input:checked + .slider:before { transform: translateX(20px); }
+
+    .category-pills {
+      display: flex; gap: 6px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 12px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .cat-pill {
+      background: #1e293b; border: 1px solid #334155; color: #cbd5e1;
+      padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 700;
+      cursor: pointer; white-space: nowrap;
+    }
+    .cat-pill.active { background: #0369a1; border-color: #38bdf8; color: white; }
+
+    .auth-btn-card {
+      background: #0b152d; border: 1.5px solid #1e3a8a; border-radius: 8px; padding: 12px;
+      cursor: pointer; text-align: left; transition: 0.15s; margin-bottom: 8px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .auth-btn-card:hover, .auth-btn-card:active {
+      border-color: #38bdf8; background: #0f2347; transform: translateY(-1px);
+    }
+    .auth-btn-card.selected {
+      border-color: #38bdf8; background: #0c4a6e; box-shadow: 0 0 10px rgba(56,189,248,0.3);
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Reproductores de audio estáticos predefinidos para Portalón -->
+
+  <!-- Reproductores estáticos para Honores entre Buques -->
+  <audio id="audBuqueBabor" src="audio/Honoresporbabor_AudioDenoise.mp3" preload="auto" playsinline></audio>
+  <audio id="audBuqueEstribor" src="audio/Honoresporestribor_AudioDenoise.mp3" preload="auto" playsinline></audio>
+  <audio id="audBuqueRetirada" src="audio/Retiradadehonores_AudioDenoise.mp3" preload="auto" playsinline></audio>
+
+  <audio id="audMando" src="audio/ComteoAlmte.mp3" preload="auto" playsinline></audio>
+  <audio id="audOficiales" src="audio/oficiales.mp3" preload="auto" playsinline></audio>
+  <audio id="audRetirada" src="audio/retiradaComteoAlmte.mp3" preload="auto" playsinline></audio>
+  <audio id="audGeneral" preload="auto" playsinline></audio>
+
+  
+
+  <header style="justify-content:center; text-align:center;">
+    <div class="brand" style="justify-content:center;">
+      <img src="img/banderaespana.jpg" alt="Honores" />
+      <div>
+        <div class="brand-title">Honores de Ordenanza</div>
+        <div class="brand-sub">PWA Web App</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="nav-bar">
+    <button class="nav-btn active" id="navPortalon" onclick="showView('portalon')">🚪 Portalón</button>
+    <button class="nav-btn" id="navBuques" onclick="showView('buques')">⚓ Buques</button>
+    <button class="nav-btn" id="navAuth" onclick="showView('auth')">👑 Autoridades</button>
+    <button class="nav-btn" id="navIzado" onclick="showView('izado')">🌅 Izado/Arriado</button>
+    <button class="nav-btn" id="navMusica" onclick="showView('musica')">🎺 Música / Himnos</button>
+  </div>
+
+  <main>
+    <!-- BANNER PWA IOS / ANDROID -->
+    <div class="install-banner" id="pwaBanner">
+      <span>📱 <b>Instalar en iPhone/Android:</b> Añadir a pantalla de inicio para usar 100% offline en la mar.</span>
+      <span style="cursor:pointer; font-weight:900;" onclick="document.getElementById('pwaBanner').style.display='none'">✕</span>
+    </div>
+
+    <!-- ESTADO DE AUDIO -->
+    <div class="status-bar" id="audioStatusBar" style="display:none;">
+      <span id="audioStatusText" style="display:flex; align-items:center; gap:8px;">
+        <span style="font-size:16px;">🔊</span>
+        <span>Reproduciendo toque...</span>
+      </span>
+      <button class="status-bar-stop-btn" onclick="stopAllAudio()">🛑 PARAR SONIDO</button>
+    </div>
+
+    <!-- VISTA 1: PORTALÓN -->
+    <div class="view-section active" id="viewPortalon">
+      <div class="card">
+        <div class="card-title">Chifle en el Portalón (Ceremonial Naval)</div>
+        <div class="btn-grid" style="grid-template-columns: 1fr;">
+          <button class="action-btn primary" id="btnChifleMando" style="padding:16px;" onclick="tocarChifleMando()">
+            <span style="font-size:14px;">🎺 CHIFLE Almirante o Comandante</span>
+            <span>⚓</span>
+          </button>
+          <button class="action-btn primary disabled" id="btnChifleRetirada" style="padding:16px;" onclick="tocarChifleRetirada()">
+            <span style="font-size:14px;">🎺 CHIFLE Retirada Almte / Comte</span>
+            
+          </button>
+          <button class="action-btn primary" id="btnChifleOficiales" style="padding:16px;" onclick="tocarChifleOficiales()">
+            <span style="font-size:14px;">🎺 CHIFLE Oficiales</span>
+            <span>⚓</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VISTA 2: HONORES ENTRE BUQUES -->
+        <!-- VISTA 2: HONORES ENTRE BUQUES -->
+    <div class="view-section" id="viewBuques">
+      <div class="card">
+        <div class="card-title">Honores entre Buques en la Mar</div>
+        
+        <!-- CUADRÍCULA DE 2 COLUMNAS A LA MISMA ALTURA: BABOR (ROJO) Y ESTRIBOR (VERDE) -->
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:12px;">
+          <!-- BABOR (ROJO, IZQUIERDA, DOBLE ALTURA) -->
+          <button class="action-btn" id="btnBuqueBabor" 
+            style="background:#7f1d1d; border:2px solid #ef4444; color:#fee2e2; min-height:120px; flex-direction:column; justify-content:center; gap:8px; text-align:center; padding:12px;" 
+            onclick="tocarHonoresBabor()">
+            <span style="font-size:24px;">🔴</span>
+            <span style="font-size:14px; font-weight:800; line-height:1.2;">HONORES POR<br>BABOR</span>
+            
+          </button>
+
+          <!-- ESTRIBOR (VERDE, DERECHA, DOBLE ALTURA) -->
+          <button class="action-btn" id="btnBuqueEstribor" 
+            style="background:#064e3b; border:2px solid #10b981; color:#d1fae5; min-height:120px; flex-direction:column; justify-content:center; gap:8px; text-align:center; padding:12px;" 
+            onclick="tocarHonoresEstribor()">
+            <span style="font-size:24px;">🟢</span>
+            <span style="font-size:14px; font-weight:800; line-height:1.2;">HONORES POR<br>ESTRIBOR</span>
+            
+          </button>
+        </div>
+
+        <!-- BOTÓN RETIRADA DE HONORES (ANCHO COMPLETO, BLOQUEADO HASTA TOCAR BR O ER) -->
+        <div style="margin-top:6px;">
+          <button class="action-btn primary disabled" id="btnBuqueRetirada" 
+            style="padding:16px; width:100%; justify-content:space-between;" 
+            onclick="tocarHonoresRetirada()">
+            <span style="font-size:14px; font-weight:700;">🎺 RETIRADA DE HONORES</span>
+            
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- VISTA 3: HONORES A AUTORIDADES -->
+        <!-- VISTA 3: HONORES A AUTORIDADES (REDISEÑADA Y LIMPIA) -->
+    <div class="view-section" id="viewAuth">
+      <div class="card">
+        <div class="card-title">
+          <span>👑 Honores a Autoridades</span>
+          <span style="font-size:11px; color:#94a3b8; font-weight:600;" id="authStepLabel">Seleccione Autoridad</span>
+        </div>
+
+        <!-- FILTROS POR CATEGORÍA -->
+        <div class="category-pills" id="authCatPills">
+          <button class="cat-pill active" onclick="filterAuthCat('todas')">Todas</button>
+          <button class="cat-pill" onclick="filterAuthCat('corona')">👑 Corona</button>
+          <button class="cat-pill" onclick="filterAuthCat('gobierno')">🏛️ Gobierno / Estado</button>
+          <button class="cat-pill" onclick="filterAuthCat('mando')">⚓ Mando Naval</button>
+          <button class="cat-pill" onclick="filterAuthCat('extranjeras')">🌍 Extranjeras</button>
+        </div>
+
+        <!-- LISTA DE AUTORIDADES EN TARJETAS LIMPIAS (SIN DESPLEGABLE) -->
+        <div id="authListContainer" style="max-height:340px; overflow-y:auto; padding-right:4px;">
+          <!-- Generado dinámicamente -->
+        </div>
+
+        <!-- PANEL DE CONTROL REGLAMENTARIO DE LA AUTORIDAD SELECCIONADA -->
+        <div id="authConfigPanel" style="display:none; margin-top:14px; border-top:1.5px solid #1e3a8a; padding-top:14px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <div>
+              <div style="font-size:14px; font-weight:900; color:#38bdf8;" id="cfgAuthName">SM El Rey</div>
+              <div style="font-size:11px; color:#94a3b8;" id="cfgAuthSub">Honores reglamentarios de Ordenanza</div>
+            </div>
+            <button class="action-btn" style="min-height:30px; padding:4px 10px; font-size:11px;" onclick="resetAuthSelection()">
+              ↩️ Cambiar
+            </button>
+          </div>
+
+          <!-- INTERRUPTORES ON/OFF PARA CADA TIPO DE SALUDO -->
+          <div class="toggle-row" id="rowSalvas">
+            <div>
+              <div class="toggle-label" id="lblSalvas">💥 Salvas de Ordenanza</div>
+              <div class="toggle-desc" id="descSalvas">21 cañonazos de salva</div>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="chkSalvas" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="toggle-row" id="rowVivas">
+            <div>
+              <div class="toggle-label" id="lblVivas">🗣️ Vivas a España</div>
+              <div class="toggle-desc" id="descVivas">7 «¡Viva España!» reglamentarios</div>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="chkVivas" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="toggle-row" id="rowMusica">
+            <div>
+              <div class="toggle-label" id="lblMusica">🎺 Música / Himno</div>
+              <div class="toggle-desc" id="descMusica">Himno Nacional de España</div>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="chkMusica" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="toggle-row" id="rowCorneta">
+            <div>
+              <div class="toggle-label">🎺 Toques de Corneta / Voz</div>
+              <div class="toggle-desc">Firmes y Presenten Armas</div>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="chkCorneta" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <!-- BOTONES DE DISPARO -->
+          <div style="margin-top:14px; display:flex; flex-direction:column; gap:8px;">
+            <button class="action-btn primary" style="background:#0284c7; border-color:#38bdf8; justify-content:center; font-size:13.5px; padding:14px;" onclick="executeConfiguredAuth()">
+              <span>▶️ DISPARAR HONORES SELECCIONADOS</span>
+            </button>
+            <button class="action-btn danger" style="justify-content:center;" onclick="stopAllAudio()">
+              <span>🛑 PARAR TODO EN SECO</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="view-section" id="viewIzado">
+      <div class="card">
+        <div class="card-title">Izado y Arriado de la Bandera</div>
+        <div class="btn-grid">
+          <button class="action-btn primary" onclick="playAudio('audio/CornetaHimnonacionalacorneta-reducido.wav', 'IZADO: Himno Nacional a Corneta')">
+            <span>🌅 IZADO DE BANDERA (08:00h)</span>
+            <span>🇪🇸</span>
+          </button>
+          <button class="action-btn primary" onclick="playAudio('audio/CornetaToquedeOracion.wav', 'ARRIADO: Toque de Oración (Ocaso)')">
+            <span>🌇 ARRIADO AL OCASO (Oración)</span>
+            <span>🇪🇸</span>
+          </button>
+          <button class="action-btn" onclick="playAudio('audio/08Oraciondelanoche.mp3', 'Oración de la Noche')">
+            <span>Oración de la Noche</span>
+            <span>⚓</span>
+          </button>
+          <button class="action-btn" onclick="playAudio('audio/SalveMarinera.mp3', 'Salve Marinera')">
+            <span>Salve Marinera</span>
+            <span>🌊</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VISTA 5: MÚSICA Y HIMNOS -->
+    <div class="view-section" id="viewMusica">
+      <div class="card">
+        <div class="card-title">Música Militar e Himnos de las Fuerzas Armadas</div>
+        <div class="btn-grid">
+          <button class="action-btn" onclick="playAudio('audio/Himno_nacional_de_Espana.mp3', 'Himno Nacional de España (Completo)')">
+            <span>Himno Nacional (Banda)</span>
+            <span>🇪🇸</span>
+          </button>
+          <button class="action-btn" onclick="playAudio('audio/MarchadeInfantes.mp3', 'Marcha de Infantes')">
+            <span>Marcha de Infantes</span>
+            <span>🎺</span>
+          </button>
+          <button class="action-btn" onclick="playAudio('audio/SalveMarinera.mp3', 'Salve Marinera')">
+            <span>Salve Marinera</span>
+            <span>⚓</span>
+          </button>
+          <button class="action-btn" onclick="playAudio('audio/Espania_corto.mp3', 'Marcha Real (Versión Breve)')">
+            <span>Marcha Real (Breve)</span>
+            <span>🇪🇸</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer style="text-align:center; padding:18px 12px; font-size:11px; color:#64748b; line-height:1.8;">
+    <div>Honores de Ordenanza · Ceremonial Militar</div>
+    <div style="margin-top:6px; color:#94a3b8; font-weight:600;">© TDF 2026</div>
+  </footer>
+
+  <script>
+    // Audio Player Controller
+    
+    
+    
+    
+    // ==========================================
+    // REPRODUCTOR PORTALÓN ROBUSTO (ELEMENTOS ESTÁTICOS)
+    // ==========================================
+    let currentActiveAudio = null;
+    let mandoChifleActivo = false;
+    let ultimoToque = null;
+
+    const audMando = document.getElementById('audMando');
+    const audOficiales = document.getElementById('audOficiales');
+    const audRetirada = document.getElementById('audRetirada');
+    const audGeneral = document.getElementById('audGeneral');
+
+    // Registrar fin de pista en cada uno
+    [audMando, audOficiales, audRetirada, audGeneral].forEach(a => {
+      if (a) {
+        a.onended = () => { onAudioTerminado(); };
+        a.onerror = () => { onAudioTerminado(); };
+      }
+    });
+
+    function onAudioTerminado() {
+      const statusBox = document.getElementById('audioStatusBar');
+      if (statusBox) statusBox.style.display = 'none';
+      currentActiveAudio = null;
+      desbloquearSegunCeremonial();
+    }
+
+    function stopAllAudio() {
+      const allAudios = [
+        document.getElementById('audMando'),
+        document.getElementById('audOficiales'),
+        document.getElementById('audRetirada'),
+        document.getElementById('audGeneral'),
+        document.getElementById('audBuqueBabor'),
+        document.getElementById('audBuqueEstribor'),
+        document.getElementById('audBuqueRetirada')
+      ];
+      allAudios.forEach(a => {
+        if (a) {
+          try { a.pause(); a.currentTime = 0; } catch(e){}
+        }
+      });
+      onAudioTerminado();
+      if (typeof onBuqueAudioFin === 'function') {
+        onBuqueAudioFin();
+      }
+    }
+
+    function tocarChifleMando() {
+      stopAllAudio();
+      ultimoToque = 'mando';
+      bloquearTodosBotonesPortalon();
+      
+      const statusBox = document.getElementById('audioStatusBar');
+      const statusText = document.getElementById('audioStatusText');
+      if (statusBox) statusBox.style.display = 'flex';
+      if (statusText) statusText.textContent = '▶️ CHIFLE: Almirante o Comandante';
+
+      currentActiveAudio = audMando;
+      audMando.currentTime = 0;
+      audMando.play().catch(e => {
+        console.error('Error audMando:', e);
+        onAudioTerminado();
+      });
+    }
+
+    function tocarChifleOficiales() {
+      stopAllAudio();
+      ultimoToque = 'oficiales';
+      bloquearTodosBotonesPortalon();
+
+      const statusBox = document.getElementById('audioStatusBar');
+      const statusText = document.getElementById('audioStatusText');
+      if (statusBox) statusBox.style.display = 'flex';
+      if (statusText) statusText.textContent = '▶️ CHIFLE: Oficiales';
+
+      currentActiveAudio = audOficiales;
+      audOficiales.currentTime = 0;
+      audOficiales.play().catch(e => {
+        console.error('Error audOficiales:', e);
+        onAudioTerminado();
+      });
+    }
+
+    function tocarChifleRetirada() {
+      if (!mandoChifleActivo) return;
+      stopAllAudio();
+      ultimoToque = 'retirada';
+      bloquearTodosBotonesPortalon();
+
+      const statusBox = document.getElementById('audioStatusBar');
+      const statusText = document.getElementById('audioStatusText');
+      if (statusBox) statusBox.style.display = 'flex';
+      if (statusText) statusText.textContent = '▶️ CHIFLE: Retirada Almte / Comte';
+
+      currentActiveAudio = audRetirada;
+      audRetirada.currentTime = 0;
+      audRetirada.play().catch(e => {
+        console.error('Error audRetirada:', e);
+        onAudioTerminado();
+      });
+    }
+
+    function playAudio(src, label) {
+      stopAllAudio();
+      const statusBox = document.getElementById('audioStatusBar');
+      const statusText = document.getElementById('audioStatusText');
+      if (statusBox) statusBox.style.display = 'flex';
+      if (statusText) statusText.textContent = `▶️ ${label}`;
+
+      currentActiveAudio = audGeneral;
+      audGeneral.src = src;
+      audGeneral.currentTime = 0;
+      audGeneral.play().catch(e => {
+        console.error('Error audGeneral:', e);
+        onAudioTerminado();
+      });
+    }
+
+    function bloquearTodosBotonesPortalon() {
+      const btnMando = document.getElementById('btnChifleMando');
+      const btnOficiales = document.getElementById('btnChifleOficiales');
+      const btnRet = document.getElementById('btnChifleRetirada');
+      if (btnMando) { btnMando.classList.add('disabled'); btnMando.disabled = true; }
+      if (btnOficiales) { btnOficiales.classList.add('disabled'); btnOficiales.disabled = true; }
+      if (btnRet) { btnRet.classList.add('disabled'); btnRet.disabled = true; }
+    }
+
+    function desbloquearSegunCeremonial() {
+      const btnMando = document.getElementById('btnChifleMando');
+      const btnOficiales = document.getElementById('btnChifleOficiales');
+      const btnRet = document.getElementById('btnChifleRetirada');
+      if (ultimoToque === 'mando') {
+        mandoChifleActivo = true;
+        if (btnRet) { btnRet.classList.remove('disabled'); btnRet.disabled = false; }
+        
+      } else {
+        mandoChifleActivo = false;
+        if (btnRet) { btnRet.classList.add('disabled'); btnRet.disabled = true; }
+        
+      }
+    }
+
+
+    function showView(viewId) {
+      document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      
+      const targetView = document.getElementById(`view${viewId.charAt(0).toUpperCase() + viewId.slice(1)}`);
+      const targetBtn = document.getElementById(`nav${viewId.charAt(0).toUpperCase() + viewId.slice(1)}`);
+      if (targetView) targetView.classList.add('active');
+      if (targetBtn) targetBtn.classList.add('active');
+    }
+
+    // Legacy
+function _legacy_onAuth() {
+      const sel = document.getElementById('authoritySelect');
+      const opt = sel.options[sel.selectedIndex];
+      const card = document.getElementById('authDetailsCard');
+      if (!sel.value) {
+        card.style.display = 'none';
+        return;
+      }
+
+      card.style.display = 'block';
+      document.getElementById('authSelectedName').textContent = opt.textContent;
+      const salvas = opt.dataset.salvas;
+      const vivas = opt.dataset.vivas;
+      const himno = opt.dataset.himno;
+
+      let desc = `• <b>Salvas de Ordenanza:</b> ${salvas > 0 ? salvas + ' cañonazos' : 'Sin salvas'}<br>`;
+      desc += `• <b>Vivas reglamentarios:</b> ${vivas > 0 ? vivas + ' vivas a España' : 'Sin vivas'}<br>`;
+      desc += `• <b>Música de honores:</b> ${himno ? himno.replace('.mp3','').replace('.wav','') : 'Toque de ordenanza'}`;
+      document.getElementById('authRulesText').innerHTML = desc;
+    }
+
+    // Legacy
+function _legacy_execAuth() {
+      const sel = document.getElementById('authoritySelect');
+      const opt = sel.options[sel.selectedIndex];
+      if (!opt.value) return;
+
+      const himno = opt.dataset.himno;
+      if (himno) {
+        playAudio(`audio/${himno}`, `Honores reglamentarios a ${opt.textContent}`);
+      } else {
+        playAudio('audio/CORNETAFIRMESAUTORIDADPRINCIPAL.mp3', `Honores a ${opt.textContent}`);
+      }
+    }
+
+    // PWA Service Worker Registration
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('PWA ServiceWorker registrado:', reg.scope))
+          .catch(err => console.log('Error ServiceWorker:', err));
+      });
+    }
+
+    // Keep screen awake (WakeLock API standard para reemplazar la extension de Android)
+    if ('wakeLock' in navigator) {
+      let wakeLock = null;
+      async function requestWakeLock() {
+        try {
+          wakeLock = await navigator.wakeLock.request('screen');
+          console.log('WakeLock activo: Pantalla encendida');
+        } catch (err) {
+          console.log('WakeLock no disponible:', err);
+        }
+      }
+      document.addEventListener('visibilitychange', () => {
+        if (wakeLock !== null && document.visibilityState === 'visible') {
+          requestWakeLock();
+        }
+      });
+      requestWakeLock();
+    }
+  
+    // ==========================================
+    
+  
+    // ==========================================
+    // LÓGICA HONORES ENTRE BUQUES (ENCLAVAMIENTO CEREMONIAL)
+    // ==========================================
+    const audBuqueBabor = document.getElementById('audBuqueBabor');
+    const audBuqueEstribor = document.getElementById('audBuqueEstribor');
+    const audBuqueRetirada = document.getElementById('audBuqueRetirada');
+
+    let buqueHonorTocado = false; // true si se ha tocado BR o ER
+    let buqueSonidoEnCurso = false;
+
+    [audBuqueBabor, audBuqueEstribor, audBuqueRetirada].forEach(a => {
+      if (a) {
+        a.onended = () => { onBuqueAudioFin(); };
+        a.onerror = () => { onBuqueAudioFin(); };
+      }
+    });
+
+    function onBuqueAudioFin() {
+      const statusBox = document.getElementById('audioStatusBar');
+      if (statusBox) statusBox.style.display = 'none';
+      buqueSonidoEnCurso = false;
+      actualizarEstadoBuques();
+    }
+
+    function tocarHonoresBabor() {
+      if (buqueSonidoEnCurso || buqueHonorTocado) return;
+      buqueSonidoEnCurso = true;
+      buqueHonorTocado = true;
+      bloquearTodosBotonesBuques();
+      reproducirAudioBuque(audBuqueBabor, 'HONORES POR BABOR');
+    }
+
+    function tocarHonoresEstribor() {
+      if (buqueSonidoEnCurso || buqueHonorTocado) return;
+      buqueSonidoEnCurso = true;
+      buqueHonorTocado = true;
+      bloquearTodosBotonesBuques();
+      reproducirAudioBuque(audBuqueEstribor, 'HONORES POR ESTRIBOR');
+    }
+
+    function tocarHonoresRetirada() {
+      if (buqueSonidoEnCurso || !buqueHonorTocado) return;
+      buqueSonidoEnCurso = true;
+      bloquearTodosBotonesBuques();
+      reproducirAudioBuque(audBuqueRetirada, 'RETIRADA DE HONORES');
+      buqueHonorTocado = false; // Consumada la retirada, el ciclo se reinicia
+    }
+
+    function reproducirAudioBuque(audioEl, label) {
+      stopAllAudio();
+      const statusBox = document.getElementById('audioStatusBar');
+      const statusText = document.getElementById('audioStatusText');
+      if (statusBox) statusBox.style.display = 'flex';
+      if (statusText) statusText.textContent = `▶️ ${label}`;
+
+      if (audioEl) {
+        audioEl.currentTime = 0;
+        audioEl.play().catch(e => {
+          console.error('Error reproducirAudioBuque:', e);
+          onBuqueAudioFin();
+        });
+      }
+    }
+
+    function bloquearTodosBotonesBuques() {
+      const btnBR = document.getElementById('btnBuqueBabor');
+      const btnER = document.getElementById('btnBuqueEstribor');
+      const btnRet = document.getElementById('btnBuqueRetirada');
+      if (btnBR) { btnBR.classList.add('disabled'); btnBR.disabled = true; }
+      if (btnER) { btnER.classList.add('disabled'); btnER.disabled = true; }
+      if (btnRet) { btnRet.classList.add('disabled'); btnRet.disabled = true; }
+    }
+
+    function actualizarEstadoBuques() {
+      const btnBR = document.getElementById('btnBuqueBabor');
+      const btnER = document.getElementById('btnBuqueEstribor');
+      const btnRet = document.getElementById('btnBuqueRetirada');
+      const badge = document.getElementById('badgeBuqueRetirada');
+
+      if (buqueHonorTocado) {
+        // Se ha tocado Babor o Estribor: se desactivan los dos honores y se activa Retirada
+        if (btnBR) { btnBR.classList.add('disabled'); btnBR.disabled = true; }
+        if (btnER) { btnER.classList.add('disabled'); btnER.disabled = true; }
+        if (btnRet) { btnRet.classList.remove('disabled'); btnRet.disabled = false; }
+        
+      } else {
+        // Estado inicial o tras Retirada: activos Babor y Estribor, bloqueada Retirada
+        if (btnBR) { btnBR.classList.remove('disabled'); btnBR.disabled = false; }
+        if (btnER) { btnER.classList.remove('disabled'); btnER.disabled = false; }
+        if (btnRet) { btnRet.classList.add('disabled'); btnRet.disabled = true; }
+        
+      }
+    }
+
+  </script>
+</body>
+</html>
