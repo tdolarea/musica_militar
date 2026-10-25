@@ -158,7 +158,7 @@
   <audio id="audMando" src="audio/ComteoAlmte.mp3" preload="auto" playsinline></audio>
   <audio id="audOficiales" src="audio/oficiales.mp3" preload="auto" playsinline></audio>
   <audio id="audRetirada" src="audio/retiradaComteoAlmte.mp3" preload="auto" playsinline></audio>
-  <audio id="audGeneral" preload="auto" playsinline></audio>
+  <audio id="audGeneralMMT" preload="auto" playsinline></audio>
 
   
 
@@ -188,12 +188,12 @@
     </div>
 
     <!-- ESTADO DE AUDIO -->
-    <div class="status-bar" id="audioStatusBar" style="display:none;">
-      <span id="audioStatusText" style="display:flex; align-items:center; gap:8px;">
+    <div class="status-bar" id="audioStatusBarMMT" style="display:none;">
+      <span id="audioStatusTextMMT" style="display:flex; align-items:center; gap:8px;">
         <span style="font-size:16px;">🔊</span>
         <span>Reproduciendo toque...</span>
       </span>
-      <button class="status-bar-stop-btn" onclick="stopAllAudio()">🛑 PARAR SONIDO</button>
+      <button class="status-bar-stop-btn" onclick="stopAllAudioMMT()">🛑 PARAR SONIDO</button>
     </div>
 
     <!-- VISTA 1: PORTALÓN -->
@@ -342,7 +342,7 @@
             <button class="action-btn primary" style="background:#0284c7; border-color:#38bdf8; justify-content:center; font-size:13.5px; padding:14px;" onclick="executeConfiguredAuth()">
               <span>▶️ DISPARAR HONORES SELECCIONADOS</span>
             </button>
-            <button class="action-btn danger" style="justify-content:center;" onclick="stopAllAudio()">
+            <button class="action-btn danger" style="justify-content:center;" onclick="stopAllAudioMMT()">
               <span>🛑 PARAR TODO EN SECO</span>
             </button>
           </div>
@@ -355,19 +355,19 @@
       <div class="card">
         <div class="card-title">Izado y Arriado de la Bandera</div>
         <div class="btn-grid">
-          <button class="action-btn primary" onclick="playAudio('audio/CornetaHimnonacionalacorneta-reducido.wav', 'IZADO: Himno Nacional a Corneta')">
+          <button class="action-btn primary" onclick="playAudioMMT('audio/CornetaHimnonacionalacorneta-reducido.wav', 'IZADO: Himno Nacional a Corneta')">
             <span>🌅 IZADO DE BANDERA (08:00h)</span>
             <span>🇪🇸</span>
           </button>
-          <button class="action-btn primary" onclick="playAudio('audio/CornetaToquedeOracion.wav', 'ARRIADO: Toque de Oración (Ocaso)')">
+          <button class="action-btn primary" onclick="playAudioMMT('audio/CornetaToquedeOracion.wav', 'ARRIADO: Toque de Oración (Ocaso)')">
             <span>🌇 ARRIADO AL OCASO (Oración)</span>
             <span>🇪🇸</span>
           </button>
-          <button class="action-btn" onclick="playAudio('audio/08Oraciondelanoche.mp3', 'Oración de la Noche')">
+          <button class="action-btn" onclick="playAudioMMT('audio/08Oraciondelanoche.mp3', 'Oración de la Noche')">
             <span>Oración de la Noche</span>
             <span>⚓</span>
           </button>
-          <button class="action-btn" onclick="playAudio('audio/SalveMarinera.mp3', 'Salve Marinera')">
+          <button class="action-btn" onclick="playAudioMMT('audio/SalveMarinera.mp3', 'Salve Marinera')">
             <span>Salve Marinera</span>
             <span>🌊</span>
           </button>
@@ -380,19 +380,19 @@
       <div class="card">
         <div class="card-title">Música Militar e Himnos de las Fuerzas Armadas</div>
         <div class="btn-grid">
-          <button class="action-btn" onclick="playAudio('audio/Himno_nacional_de_Espana.mp3', 'Himno Nacional de España (Completo)')">
+          <button class="action-btn" onclick="playAudioMMT('audio/Himno_nacional_de_Espana.mp3', 'Himno Nacional de España (Completo)')">
             <span>Himno Nacional (Banda)</span>
             <span>🇪🇸</span>
           </button>
-          <button class="action-btn" onclick="playAudio('audio/MarchadeInfantes.mp3', 'Marcha de Infantes')">
+          <button class="action-btn" onclick="playAudioMMT('audio/MarchadeInfantes.mp3', 'Marcha de Infantes')">
             <span>Marcha de Infantes</span>
             <span>🎺</span>
           </button>
-          <button class="action-btn" onclick="playAudio('audio/SalveMarinera.mp3', 'Salve Marinera')">
+          <button class="action-btn" onclick="playAudioMMT('audio/SalveMarinera.mp3', 'Salve Marinera')">
             <span>Salve Marinera</span>
             <span>⚓</span>
           </button>
-          <button class="action-btn" onclick="playAudio('audio/Espania_corto.mp3', 'Marcha Real (Versión Breve)')">
+          <button class="action-btn" onclick="playAudioMMT('audio/Espania_corto.mp3', 'Marcha Real (Versión Breve)')">
             <span>Marcha Real (Breve)</span>
             <span>🇪🇸</span>
           </button>
@@ -415,36 +415,36 @@
     // ==========================================
     // REPRODUCTOR PORTALÓN ROBUSTO (ELEMENTOS ESTÁTICOS)
     // ==========================================
-    let currentActiveAudio = null;
+    let currentActiveAudioMMT = null;
     let mandoChifleActivo = false;
     let ultimoToque = null;
 
     const audMando = document.getElementById('audMando');
     const audOficiales = document.getElementById('audOficiales');
     const audRetirada = document.getElementById('audRetirada');
-    const audGeneral = document.getElementById('audGeneral');
+    const audGeneralMMT = document.getElementById('audGeneralMMT');
 
     // Registrar fin de pista en cada uno
-    [audMando, audOficiales, audRetirada, audGeneral].forEach(a => {
+    [audMando, audOficiales, audRetirada, audGeneralMMT].forEach(a => {
       if (a) {
-        a.onended = () => { onAudioTerminado(); };
-        a.onerror = () => { onAudioTerminado(); };
+        a.onended = () => { onAudioTerminadoMMT(); };
+        a.onerror = () => { onAudioTerminadoMMT(); };
       }
     });
 
-    function onAudioTerminado() {
-      const statusBox = document.getElementById('audioStatusBar');
+    function onAudioTerminadoMMT() {
+      const statusBox = document.getElementById('audioStatusBarMMT');
       if (statusBox) statusBox.style.display = 'none';
-      currentActiveAudio = null;
+      currentActiveAudioMMT = null;
       desbloquearSegunCeremonial();
     }
 
-    function stopAllAudio() {
+    function stopAllAudioMMT() {
       const allAudios = [
         document.getElementById('audMando'),
         document.getElementById('audOficiales'),
         document.getElementById('audRetirada'),
-        document.getElementById('audGeneral'),
+        document.getElementById('audGeneralMMT'),
         document.getElementById('audBuqueBabor'),
         document.getElementById('audBuqueEstribor'),
         document.getElementById('audBuqueRetirada')
@@ -454,80 +454,80 @@
           try { a.pause(); a.currentTime = 0; } catch(e){}
         }
       });
-      onAudioTerminado();
+      onAudioTerminadoMMT();
       if (typeof onBuqueAudioFin === 'function') {
         onBuqueAudioFin();
       }
     }
 
     function tocarChifleMando() {
-      stopAllAudio();
+      stopAllAudioMMT();
       ultimoToque = 'mando';
       bloquearTodosBotonesPortalon();
       
-      const statusBox = document.getElementById('audioStatusBar');
-      const statusText = document.getElementById('audioStatusText');
+      const statusBox = document.getElementById('audioStatusBarMMT');
+      const statusText = document.getElementById('audioStatusTextMMT');
       if (statusBox) statusBox.style.display = 'flex';
       if (statusText) statusText.textContent = '▶️ CHIFLE: Almirante o Comandante';
 
-      currentActiveAudio = audMando;
+      currentActiveAudioMMT = audMando;
       audMando.currentTime = 0;
       audMando.play().catch(e => {
         console.error('Error audMando:', e);
-        onAudioTerminado();
+        onAudioTerminadoMMT();
       });
     }
 
     function tocarChifleOficiales() {
-      stopAllAudio();
+      stopAllAudioMMT();
       ultimoToque = 'oficiales';
       bloquearTodosBotonesPortalon();
 
-      const statusBox = document.getElementById('audioStatusBar');
-      const statusText = document.getElementById('audioStatusText');
+      const statusBox = document.getElementById('audioStatusBarMMT');
+      const statusText = document.getElementById('audioStatusTextMMT');
       if (statusBox) statusBox.style.display = 'flex';
       if (statusText) statusText.textContent = '▶️ CHIFLE: Oficiales';
 
-      currentActiveAudio = audOficiales;
+      currentActiveAudioMMT = audOficiales;
       audOficiales.currentTime = 0;
       audOficiales.play().catch(e => {
         console.error('Error audOficiales:', e);
-        onAudioTerminado();
+        onAudioTerminadoMMT();
       });
     }
 
     function tocarChifleRetirada() {
       if (!mandoChifleActivo) return;
-      stopAllAudio();
+      stopAllAudioMMT();
       ultimoToque = 'retirada';
       bloquearTodosBotonesPortalon();
 
-      const statusBox = document.getElementById('audioStatusBar');
-      const statusText = document.getElementById('audioStatusText');
+      const statusBox = document.getElementById('audioStatusBarMMT');
+      const statusText = document.getElementById('audioStatusTextMMT');
       if (statusBox) statusBox.style.display = 'flex';
       if (statusText) statusText.textContent = '▶️ CHIFLE: Retirada Almte / Comte';
 
-      currentActiveAudio = audRetirada;
+      currentActiveAudioMMT = audRetirada;
       audRetirada.currentTime = 0;
       audRetirada.play().catch(e => {
         console.error('Error audRetirada:', e);
-        onAudioTerminado();
+        onAudioTerminadoMMT();
       });
     }
 
-    function playAudio(src, label) {
-      stopAllAudio();
-      const statusBox = document.getElementById('audioStatusBar');
-      const statusText = document.getElementById('audioStatusText');
+    function playAudioMMT(src, label) {
+      stopAllAudioMMT();
+      const statusBox = document.getElementById('audioStatusBarMMT');
+      const statusText = document.getElementById('audioStatusTextMMT');
       if (statusBox) statusBox.style.display = 'flex';
       if (statusText) statusText.textContent = `▶️ ${label}`;
 
-      currentActiveAudio = audGeneral;
-      audGeneral.src = src;
-      audGeneral.currentTime = 0;
-      audGeneral.play().catch(e => {
-        console.error('Error audGeneral:', e);
-        onAudioTerminado();
+      currentActiveAudioMMT = audGeneralMMT;
+      audGeneralMMT.src = src;
+      audGeneralMMT.currentTime = 0;
+      audGeneralMMT.play().catch(e => {
+        console.error('Error audGeneralMMT:', e);
+        onAudioTerminadoMMT();
       });
     }
 
@@ -596,9 +596,9 @@ function _legacy_execAuth() {
 
       const himno = opt.dataset.himno;
       if (himno) {
-        playAudio(`audio/${himno}`, `Honores reglamentarios a ${opt.textContent}`);
+        playAudioMMT(`audio/${himno}`, `Honores reglamentarios a ${opt.textContent}`);
       } else {
-        playAudio('audio/CORNETAFIRMESAUTORIDADPRINCIPAL.mp3', `Honores a ${opt.textContent}`);
+        playAudioMMT('audio/CORNETAFIRMESAUTORIDADPRINCIPAL.mp3', `Honores a ${opt.textContent}`);
       }
     }
 
@@ -651,7 +651,7 @@ function _legacy_execAuth() {
     });
 
     function onBuqueAudioFin() {
-      const statusBox = document.getElementById('audioStatusBar');
+      const statusBox = document.getElementById('audioStatusBarMMT');
       if (statusBox) statusBox.style.display = 'none';
       buqueSonidoEnCurso = false;
       actualizarEstadoBuques();
@@ -682,9 +682,9 @@ function _legacy_execAuth() {
     }
 
     function reproducirAudioBuque(audioEl, label) {
-      stopAllAudio();
-      const statusBox = document.getElementById('audioStatusBar');
-      const statusText = document.getElementById('audioStatusText');
+      stopAllAudioMMT();
+      const statusBox = document.getElementById('audioStatusBarMMT');
+      const statusText = document.getElementById('audioStatusTextMMT');
       if (statusBox) statusBox.style.display = 'flex';
       if (statusText) statusText.textContent = `▶️ ${label}`;
 
