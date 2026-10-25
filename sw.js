@@ -1,4 +1,4 @@
-// SW Musica Militar Monomódulo 1792952820
+// SW Musica Militar Refinado 1792957186
 self.addEventListener('install', e => self.skipWaiting());
 self.addEventListener('activate', e => {
   e.waitUntil(

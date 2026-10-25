@@ -26,39 +26,141 @@
     .brand-title { font-size: 15px; font-weight: 800; color: #38bdf8; line-height: 1.15; }
     .brand-sub { font-size: 10px; color: #94a3b8; font-weight: 700; text-transform: uppercase; }
 
-    main { flex: 1; padding: 14px 12px; max-width: 600px; margin: 0 auto; width: 100%; }
+    /* Canal Dual de Estado de Sonido */
+    .dual-status-container {
+      position: sticky; top: 64px; z-index: 99; margin: 10px 12px 4px 12px; display: flex; flex-direction: column; gap: 6px;
+    }
+    .status-bar-channel {
+      border-radius: 8px; padding: 10px 14px; display: none; align-items: center; justify-content: space-between;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4); animation: pulseAlert 2s infinite;
+    }
+    .status-bar-banda { background: linear-gradient(135deg, #0369a1 0%, #0c4a6e 100%); border: 1.5px solid #38bdf8; }
+    .status-bar-corneta { background: linear-gradient(135deg, #b45309 0%, #78350f 100%); border: 1.5px solid #f59e0b; }
+    
+    @keyframes pulseAlert {
+      0% { opacity: 0.95; } 50% { opacity: 1; } 100% { opacity: 0.95; }
+    }
+    .status-channel-text {
+      font-size: 12px; font-weight: 800; color: white; display: flex; align-items: center; gap: 6px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 72%;
+    }
+    .status-stop-btn {
+      background: #dc2626; border: none; color: white; padding: 6px 12px; border-radius: 6px;
+      font-size: 10px; font-weight: 900; cursor: pointer; text-transform: uppercase;
+    }
+    .status-stop-btn:active { transform: scale(0.95); }
+
+    main { flex: 1; padding: 8px 12px 24px 12px; max-width: 650px; margin: 0 auto; width: 100%; }
 
     .card {
-      background: #0f172a; border: 1px solid #1e3a8a; border-radius: 12px; padding: 16px;
+      background: #0f172a; border: 1px solid #1e3a8a; border-radius: 12px; padding: 14px;
       margin-bottom: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);
     }
     .card-title {
-      font-size: 12px; font-weight: 800; color: #38bdf8; text-transform: uppercase;
-      letter-spacing: 0.5px; margin-bottom: 12px; display: flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 800; color: #38bdf8; text-transform: uppercase;
+      letter-spacing: 0.5px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .card-badge {
+      background: #1e3a8a; color: #93c5fd; font-size: 10px; padding: 3px 8px; border-radius: 10px; font-weight: 700;
     }
 
-    .status-bar {
-      background: #1e3a8a; border: 1px solid #38bdf8; border-radius: 8px; padding: 10px 14px;
-      margin-bottom: 14px; display: none; align-items: center; justify-content: space-between;
-      animation: pulse 2s infinite;
+    /* Etiquetas de categorías y desplegables */
+    .field-group { margin-bottom: 10px; }
+    .field-label { font-size: 11px; font-weight: 800; color: #cbd5e1; margin-bottom: 4px; display: flex; align-items: center; gap: 5px; text-transform: uppercase; }
+    .custom-select {
+      width: 100%; background: #1e293b; color: #f8fafc; border: 1.5px solid #334155;
+      border-radius: 8px; padding: 10px 12px; font-size: 13px; font-weight: 700;
+      outline: none; cursor: pointer; transition: 0.15s;
     }
-    @keyframes pulse { 0% { opacity: 0.9; } 50% { opacity: 1; } 100% { opacity: 0.9; } }
-    .status-bar-text { font-size: 13px; font-weight: 800; color: white; display: flex; align-items: center; gap: 8px; }
-    .status-bar-stop-btn {
-      background: #dc2626; border: none; color: white; padding: 6px 12px; border-radius: 6px;
-      font-size: 11px; font-weight: 800; cursor: pointer; text-transform: uppercase;
+    .custom-select:focus, .custom-select.selected { border-color: #38bdf8; background: #0c4a6e; }
+
+    /* Barra común de botones para los 4 desplegables de música */
+    .common-btn-bar {
+      display: grid; grid-template-columns: 2fr 1.5fr 1.2fr; gap: 8px; margin-top: 14px; padding-top: 10px;
+      border-top: 1px dashed #334155;
+    }
+    .btn-action-main {
+      border: none; border-radius: 8px; padding: 12px 10px; font-size: 12px; font-weight: 800;
+      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;
+      transition: all 0.15s ease; touch-action: manipulation; text-transform: uppercase;
+    }
+    .btn-action-main:active { transform: scale(0.97); }
+    .btn-play-banda { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color: white; border: 1.5px solid #38bdf8; }
+    .btn-add-banda { background: #1e293b; color: #38bdf8; border: 1.5px solid #475569; }
+    .btn-lyrics-banda { background: #334155; color: #f1f5f9; border: 1.5px solid #475569; }
+
+    /* Botones de Corneta debajo de la barra */
+    .corneta-btn-bar {
+      display: grid; grid-template-columns: 2fr 1.5fr; gap: 8px; margin-top: 10px;
+    }
+    .btn-play-corneta { background: linear-gradient(135deg, #b45309 0%, #78350f 100%); color: white; border: 1.5px solid #f59e0b; }
+    .btn-add-corneta { background: #1e293b; color: #fbbf24; border: 1.5px solid #475569; }
+
+    /* Bloque 3: Playlists completas con reordenación y persistencia */
+    .playlist-top-controls {
+      display: flex; gap: 8px; margin-bottom: 10px;
+    }
+    .playlist-select-active {
+      flex: 1; background: #1e293b; color: #f8fafc; border: 1.5px solid #38bdf8;
+      border-radius: 8px; padding: 10px; font-size: 12px; font-weight: 700;
+    }
+    .btn-pl-small {
+      background: #0284c7; border: none; color: white; padding: 8px 12px; border-radius: 8px;
+      font-size: 12px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 4px;
+    }
+    .btn-pl-small:active { transform: scale(0.96); }
+
+    .playlist-window {
+      background: #070d1e; border: 1.5px solid #1e3a8a; border-radius: 8px; padding: 8px;
+      min-height: 120px; max-height: 240px; overflow-y: auto; margin-bottom: 10px;
+    }
+    .pl-item-row {
+      display: flex; align-items: center; justify-content: space-between; padding: 8px 10px;
+      background: #1e293b; border-radius: 6px; margin-bottom: 5px; font-size: 12px; font-weight: 700;
+      border: 1.5px solid transparent; cursor: pointer; transition: 0.1s;
+    }
+    .pl-item-row:hover { border-color: #475569; }
+    .pl-item-row.selected {
+      border-color: #38bdf8; background: #0c4a6e; color: #ffffff;
+    }
+    .pl-item-row.active-playing {
+      border-color: #22c55e; background: #14532d; color: #bbf7d0; animation: pulseAlert 1.5s infinite;
     }
 
-    .btn-grid { display: flex; flex-direction: column; gap: 10px; }
-    .action-btn {
-      width: 100%; border: none; border-radius: 10px; padding: 14px 16px;
-      display: flex; align-items: center; justify-content: space-between;
-      cursor: pointer; transition: all 0.15s ease;
-      background: #1e293b; color: #f8fafc; border: 1.5px solid #334155;
-      font-size: 14px; font-weight: 700; box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-      touch-action: manipulation;
+    .playlist-reorder-bar {
+      display: flex; gap: 8px; align-items: center; margin-bottom: 12px;
     }
-    .action-btn:active { transform: scale(0.98); background: #0c4a6e; border-color: #38bdf8; }
+    .btn-reorder {
+      background: #334155; border: 1px solid #475569; color: white; padding: 6px 12px;
+      border-radius: 6px; font-size: 12px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 4px;
+    }
+    .btn-reorder:active { transform: scale(0.95); }
+    .btn-del-item {
+      background: #991b1b; border: 1px solid #ef4444; color: white; padding: 6px 12px;
+      border-radius: 6px; font-size: 12px; font-weight: 800; cursor: pointer; margin-left: auto;
+    }
+
+    .playlist-exec-bar {
+      display: grid; grid-template-columns: 2fr 1.2fr 1fr; gap: 8px;
+    }
+
+    /* Modal de Letras */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8);
+      backdrop-filter: blur(4px); z-index: 200; display: none; align-items: center; justify-content: center; padding: 16px;
+    }
+    .modal-content {
+      background: #0f172a; border: 2px solid #38bdf8; border-radius: 14px; width: 100%; max-width: 500px;
+      max-height: 85vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.8);
+    }
+    .modal-header {
+      background: #1e293b; padding: 14px 16px; display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid #334155;
+    }
+    .modal-title { font-size: 14px; font-weight: 800; color: #38bdf8; }
+    .modal-close-btn { background: transparent; border: none; color: #94a3b8; font-size: 20px; cursor: pointer; }
+    .modal-body { padding: 16px; overflow-y: auto; font-size: 14px; line-height: 1.6; color: #e2e8f0; white-space: pre-wrap; }
+    .modal-author { font-size: 11px; color: #94a3b8; margin-bottom: 12px; font-style: italic; }
 
     footer {
       background: #090e1a; border-top: 1px solid #1e293b; padding: 14px; text-align: center;
@@ -78,86 +180,611 @@
     </div>
   </header>
 
+  <!-- CANAL DUAL DE REPRODUCCIÓN (BANDA Y CORNETA INDEPENDIENTES) -->
+  <div class="dual-status-container">
+    <div id="statusBandaMMT" class="status-bar-channel status-bar-banda">
+      <div id="statusBandaTextMMT" class="status-channel-text">🎺 Banda: Sonando...</div>
+      <button type="button" class="status-stop-btn" onclick="stopBandaMMT()">🛑 PARAR BANDA</button>
+    </div>
+    <div id="statusCornetaMMT" class="status-bar-channel status-bar-corneta">
+      <div id="statusCornetaTextMMT" class="status-channel-text">📯 Corneta: Orden activa...</div>
+      <button type="button" class="status-stop-btn" onclick="stopCornetaMMT()">🛑 PARAR CORNETA</button>
+    </div>
+  </div>
+
   <main>
-    <div id="audioStatusBarMMT" class="status-bar">
-      <div id="audioStatusTextMMT" class="status-bar-text">▶️ Reproduciendo...</div>
-      <button type="button" class="status-bar-stop-btn" onclick="stopAllAudioMMT()">🛑 PARAR SONIDO</button>
+    <!-- BLOQUE 1: BANDA DE MÚSICA (4 DESPLEGABLES CON BOTONERA COMÚN) -->
+    <div class="card">
+      <div class="card-title">
+        <span>🎺 Bloque 1: Banda de Música</span>
+        <span class="card-badge">Canal Banda</span>
+      </div>
+
+      <!-- Desplegable 1: Himnos Institucionales -->
+      <div class="field-group">
+        <label class="field-label" for="selCatInstitucionales">🇪🇸 1. Himnos Institucionales</label>
+        <select id="selCatInstitucionales" class="custom-select" onchange="onMusicaSelectChange(this, 'institucionales')">
+            <option value="">-- Seleccione Himno Institucional --</option>
+            <option value="m_espana_largo">Himno Nacional de España (Completo)</option>
+            <option value="m_espana_corto">Marcha Real (Versión Breve)</option>
+        </select>
+      </div>
+
+      <!-- Desplegable 2: Marchas Militares -->
+      <div class="field-group">
+        <label class="field-label" for="selCatMarchas">🥁 2. Marchas Militares</label>
+        <select id="selCatMarchas" class="custom-select" onchange="onMusicaSelectChange(this, 'marchas')">
+            <option value="">-- Seleccione Marcha Militar --</option>
+            <option value="m_ganando_barlovento">Ganando Barlovento</option>
+            <option value="m_infantes">Marcha de Infantes</option>
+            <option value="m_san_marcial">San Marcial</option>
+        </select>
+      </div>
+
+      <!-- Desplegable 3: Himnos de Armas y Cuerpos -->
+      <div class="field-group">
+        <label class="field-label" for="selCatHimnos">⚔️ 3. Himnos de Armas y Cuerpos</label>
+        <select id="selCatHimnos" class="custom-select" onchange="onMusicaSelectChange(this, 'himnos')">
+            <option value="">-- Seleccione Himno de Arma / Cuerpo --</option>
+            <option value="h_armada">Himno de la Armada</option>
+            <option value="h_guardia_civil">Himno de la Guardia Civil</option>
+            <option value="h_ejercito_tierra">Himno del Ejército de Tierra</option>
+            <option value="h_aire">Himno del Ejército del Aire y del Espacio</option>
+            <option value="h_infanteria_marina">Marcha Heroica de Infantería de Marina</option>
+        </select>
+      </div>
+
+      <!-- Desplegable 4: Música Religiosa Militar -->
+      <div class="field-group">
+        <label class="field-label" for="selCatReligiosa">✝️ 4. Música Religiosa Militar</label>
+        <select id="selCatReligiosa" class="custom-select" onchange="onMusicaSelectChange(this, 'religiosa')">
+            <option value="">-- Seleccione Música Religiosa --</option>
+            <option value="r_muerte_final">La Muerte no es el Final</option>
+            <option value="r_oracion">Oración de la Noche</option>
+            <option value="r_salve">Salve Marinera</option>
+        </select>
+      </div>
+
+      <!-- BOTONERA COMÚN UNIFICADA PARA LOS CUATRO DESPLEGABLES -->
+      <div class="common-btn-bar">
+        <button type="button" id="btnPlayBandaCommon" class="btn-action-main btn-play-banda" onclick="playMusicaSeleccionadaMMT()">
+          <span>▶️</span> <span>PLAY</span>
+        </button>
+        <button type="button" id="btnAddBandaCommon" class="btn-action-main btn-add-banda" onclick="addMusicaSeleccionadaAPlaylistMMT()">
+          <span>➕</span> <span>AÑADIR A LISTA</span>
+        </button>
+        <button type="button" id="btnLyricsBandaCommon" class="btn-action-main btn-lyrics-banda" onclick="verLetraMusicaSeleccionadaMMT()">
+          <span>📜</span> <span>VER LETRA</span>
+        </button>
+      </div>
     </div>
 
-    <div class="view-section active" id="viewMusicaMMT">
-      <div class="card">
-        <div class="card-title">🎺 Himnos y Marchas de las Fuerzas Armadas</div>
-        <div class="btn-grid">
-          <button type="button" class="action-btn" onclick="playAudioMMT('audio/Espania_largo.mp3', 'Himno Nacional de España (Completo)')">
-            <span>Himno Nacional de España (Completo)</span>
-            <span>🇪🇸</span>
-          </button>
-          <button type="button" class="action-btn" onclick="playAudioMMT('audio/Espania_corto.mp3', 'Marcha Real (Versión Breve)')">
-            <span>Marcha Real (Versión Breve)</span>
-            <span>🇪🇸</span>
-          </button>
-          <button type="button" class="action-btn" onclick="playAudioMMT('audio/MarchadeInfantes.mp3', 'Marcha de Infantes')">
-            <span>Marcha de Infantes</span>
-            <span>🎺</span>
-          </button>
-          <button type="button" class="action-btn" onclick="playAudioMMT('audio/OraciondelaNoche.mp3', 'Oración de la Noche')">
-            <span>Oración de la Noche</span>
-            <span>✝️</span>
-          </button>
-        </div>
+    <!-- BLOQUE 2: TOQUES DE CORNETA (DESPLEGABLE + BOTONERA DEBAJO) -->
+    <div class="card">
+      <div class="card-title">
+        <span>📯 Bloque 2: Toques de Corneta</span>
+        <span class="card-badge" style="background: #78350f; color: #fef3c7;">Canal Corneta</span>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="selCorneta">Toques Reglamentarios de Ordenanza</label>
+        <select id="selCorneta" class="custom-select">
+            <option value="">-- Seleccione Toque de Corneta --</option>
+            <option value="c_alto">Alto</option>
+            <option value="c_atencion">Atención</option>
+            <option value="c_cambiohombro">Cambio de hombro</option>
+            <option value="c_cubrir">Cubrir</option>
+            <option value="c_defrente">De frente</option>
+            <option value="c_derecha">Derecha</option>
+            <option value="c_descanso">Descanso</option>
+            <option value="c_discrecion">Discreción</option>
+            <option value="c_findiscrecion">Fin de discreción</option>
+            <option value="c_firmes">Firmes</option>
+            <option value="c_izquierda">Izquierda</option>
+            <option value="c_llamadamandos">Llamada de mandos</option>
+            <option value="c_mediavuelta">Media vuelta</option>
+            <option value="c_pasofuneral">Paso funeral</option>
+            <option value="c_pasoligero">Paso ligero</option>
+            <option value="c_presenten">Presenten armas</option>
+            <option value="c_rancho">Rancho</option>
+            <option value="c_silencio">Silencio</option>
+            <option value="c_sobrehombro">Sobre el hombro</option>
+            <option value="c_oracion">Toque de Oración</option>
+        </select>
+      </div>
+
+      <!-- BOTONES DEBAJO DE LA BARRA DE CORNETA -->
+      <div class="corneta-btn-bar">
+        <button type="button" class="btn-action-main btn-play-corneta" onclick="playCornetaSeleccionadaMMT()">
+          <span>▶️</span> <span>TOCAR CORNETA</span>
+        </button>
+        <button type="button" class="btn-action-main btn-add-corneta" onclick="addCornetaSeleccionadaAPlaylistMMT()">
+          <span>➕</span> <span>AÑADIR A LISTA</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- BLOQUE 3: LISTAS DE REPRODUCCIÓN (PLAYLISTS PARA ENSAYOS Y DESFILES) -->
+    <div class="card">
+      <div class="card-title">
+        <span>📋 Bloque 3: Lista de Reproducción</span>
+        <span class="card-badge" style="background: #14532d; color: #bbf7d0;">Persistente</span>
+      </div>
+
+      <!-- Selector de lista existente y Crear nueva -->
+      <div class="playlist-top-controls">
+        <select id="selPlaylistActiva" class="playlist-select-active" onchange="cambiarPlaylistActivaMMT(this.value)">
+          <option value="desfile_standard">🎖️ Desfile de Ordenanza</option>
+        </select>
+        <button type="button" class="btn-pl-small" onclick="crearNuevaListaPromptMMT()">➕ Nueva Lista</button>
+      </div>
+
+      <!-- Ventana con las pistas de la lista -->
+      <div class="playlist-window" id="playlistWindowContainer">
+        <!-- Render dinámico de pistas con selección -->
+      </div>
+
+      <!-- Barra de reordenación y borrado de pista seleccionada -->
+      <div class="playlist-reorder-bar">
+        <button type="button" class="btn-reorder" onclick="subirPistaSeleccionadaMMT()">🔼 Subir</button>
+        <button type="button" class="btn-reorder" onclick="bajarPistaSeleccionadaMMT()">🔽 Bajar</button>
+        <button type="button" class="btn-del-item" onclick="borrarPistaSeleccionadaMMT()">🗑️ Quitar pista</button>
+      </div>
+
+      <!-- Barra de ejecución y guardado -->
+      <div class="playlist-exec-bar">
+        <button type="button" id="btnPlayPlaylist" class="btn-action-main" style="background: #16a34a; color: white;" onclick="iniciarPlaylistMMT()">
+          <span>▶️</span> <span>INICIAR</span>
+        </button>
+        <button type="button" class="btn-action-main" style="background: #dc2626; color: white;" onclick="detenerPlaylistMMT()">
+          <span>⏹️</span> <span>DETENER</span>
+        </button>
+        <button type="button" class="btn-action-main" style="background: #1e3a8a; color: #38bdf8; border: 1.5px solid #38bdf8;" onclick="guardarListaActualMMT()">
+          <span>💾</span> <span>GUARDAR</span>
+        </button>
       </div>
     </div>
   </main>
+
+  <!-- MODAL DE LETRA DE CANCIONES -->
+  <div id="lyricsModal" class="modal-overlay" onclick="cerrarLyricsModalMMT(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div id="modalLyricsTitle" class="modal-title">Letra de la Canción</div>
+        <button type="button" class="modal-close-btn" onclick="cerrarLyricsModalMMT()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="modalLyricsAuthor" class="modal-author"></div>
+        <div id="modalLyricsText"></div>
+      </div>
+    </div>
+  </div>
 
   <footer>
     Música Militar · Armada Española · @TDF 2025
   </footer>
 
-  <audio id="audGeneralMMT" preload="auto" playsinline></audio>
+  <!-- CANALES DE AUDIO DUAL -->
+  <audio id="audioBandaMMT" preload="auto" playsinline></audio>
+  <audio id="audioCornetaMMT" preload="auto" playsinline></audio>
 
   <script>
-    const APP_VERSION = 'v1792952820';
+    const APP_VERSION = 'v1792957186';
 
-    const audGeneralMMT = document.getElementById('audGeneralMMT');
-    let currentActiveAudioMMT = null;
+    // ==========================================
+    // BASES DE DATOS
+    // ==========================================
+    const TODAS_MUSICAS = [{"id": "m_espana_largo", "nombre": "Himno Nacional de España (Completo)", "archivo": "audio/Espania_largo.mp3", "letraId": "himno_nacional"}, {"id": "m_espana_corto", "nombre": "Marcha Real (Versión Breve)", "archivo": "audio/Espania_corto.mp3", "letraId": "himno_nacional"}, {"id": "m_infantes", "nombre": "Marcha de Infantes", "archivo": "audio/MarchadeInfantes.mp3", "letraId": null}, {"id": "m_san_marcial", "nombre": "San Marcial", "archivo": "audio/SanMarcial.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/honores/main/audio/SanMarcial.mp3", "letraId": null}, {"id": "m_ganando_barlovento", "nombre": "Ganando Barlovento", "archivo": "audio/GanandoBarlovento.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/honores/main/audio/GanandoBarlovento.mp3", "letraId": null}, {"id": "h_armada", "nombre": "Himno de la Armada", "archivo": "audio/HimnoArmada.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/honores/main/audio/HimnoArmada.mp3", "letraId": "himno_armada"}, {"id": "h_infanteria_marina", "nombre": "Marcha Heroica de Infantería de Marina", "archivo": "audio/HimnoInfanteriaMarina.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/honores/main/audio/HimnoInfanteriaMarina.mp3", "letraId": "himno_infanteria_marina"}, {"id": "h_ejercito_tierra", "nombre": "Himno del Ejército de Tierra", "archivo": "audio/HimnoEjercitoTierra.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/honores/main/audio/HimnoEjercitoTierra.mp3", "letraId": null}, {"id": "h_aire", "nombre": "Himno del Ejército del Aire y del Espacio", "archivo": "audio/HimnoAire.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/honores/main/audio/HimnoAire.mp3", "letraId": null}, {"id": "h_guardia_civil", "nombre": "Himno de la Guardia Civil", "archivo": "audio/HimnoGuardiaCivil.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/honores/main/audio/HimnoGuardiaCivil.mp3", "letraId": null}, {"id": "r_salve", "nombre": "Salve Marinera", "archivo": "audio/SalveMarinera.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/honores/main/audio/SalveMarinera.mp3", "letraId": "salve_marinera"}, {"id": "r_oracion", "nombre": "Oración de la Noche", "archivo": "audio/OraciondelaNoche.mp3", "letraId": "oracion_noche"}, {"id": "r_muerte_final", "nombre": "La Muerte no es el Final", "archivo": "audio/LaMuerteNoEsElFinal.mp3", "urlRemota": "https://raw.githubusercontent.com/tdolarea/honores/main/audio/LaMuerteNoEsElFinal.mp3", "letraId": "la_muerte_no_es_el_final"}];
+    const CORNETAS_DB = [{"id": "c_firmes", "nombre": "Firmes", "archivo": "audio/cornetafirmes.wav"}, {"id": "c_atencion", "nombre": "Atención", "archivo": "audio/ATENCION.mp3"}, {"id": "c_defrente", "nombre": "De frente", "archivo": "audio/DEFRENTE.mp3"}, {"id": "c_alto", "nombre": "Alto", "archivo": "audio/ALTO.mp3"}, {"id": "c_pasoligero", "nombre": "Paso ligero", "archivo": "audio/DEFRENTEPASOLIGERO.mp3"}, {"id": "c_pasofuneral", "nombre": "Paso funeral", "archivo": "audio/DEFRENTEPASOFUNERALA.mp3"}, {"id": "c_presenten", "nombre": "Presenten armas", "archivo": "audio/cornetapresentenarmas.wav"}, {"id": "c_sobrehombro", "nombre": "Sobre el hombro", "archivo": "audio/CORNETASOBREELHOMBRO.mp3"}, {"id": "c_cambiohombro", "nombre": "Cambio de hombro", "archivo": "audio/CAMBIODEHOMBRO.mp3"}, {"id": "c_descanso", "nombre": "Descanso", "archivo": "audio/Cornetadescanso.wav"}, {"id": "c_derecha", "nombre": "Derecha", "archivo": "audio/DERECHA.mp3"}, {"id": "c_izquierda", "nombre": "Izquierda", "archivo": "audio/IZQUIERDA.mp3"}, {"id": "c_mediavuelta", "nombre": "Media vuelta", "archivo": "audio/MEDIA_VUELTA.mp3"}, {"id": "c_cubrir", "nombre": "Cubrir", "archivo": "audio/CUBRIR.mp3"}, {"id": "c_discrecion", "nombre": "Discreción", "archivo": "audio/DISCRECCION.mp3"}, {"id": "c_findiscrecion", "nombre": "Fin de discreción", "archivo": "audio/FIN_DISCRECCION.mp3"}, {"id": "c_silencio", "nombre": "Silencio", "archivo": "audio/SILENCIO.mp3"}, {"id": "c_oracion", "nombre": "Toque de Oración", "archivo": "audio/CornetaToquedeOracion.wav"}, {"id": "c_llamadamandos", "nombre": "Llamada de mandos", "archivo": "audio/LLAMADA_MANDOS.mp3"}, {"id": "c_rancho", "nombre": "Rancho", "archivo": "audio/RANCHO.mp3"}];
+    const LETRAS_DB = {"salve_marinera": {"title": "Salve Marinera", "author": "Música: Cristóbal Oudrid | Letra: Mariano Méndez Vigo", "text": "¡Salve, Estrella de los mares,\nde los mares iris de eterna ventura!\n¡Salve, fénix de hermosura,\nMadre del Amor!\n¡Madre del Amor!\n\nA Ti, celestial Señora,\na Ti, dulce y limpia flor,\ncon el alma que Te adora,\npide la Armada su honor.\n\nDe tu piedad infinita\nalcanza para el marino,\nla gracia de tu cariño\ny el perdón de su Señor.\n\n¡Salve, Estrella de los mares!\n¡Salve, Estrella de los mares!\n¡Salve, Salve, Salve, Salve!"}, "oracion_noche": {"title": "Oración de la Noche", "author": "Tradición de la Armada Española", "text": "Tú que dispones de cielo y mar,\nhaces la calma y la tempestad,\nten de nosotros piedad, Señor,\nde los que vagan por el mar.\n\nTen de nosotros piedad, Señor,\nde los que vagan por el mar.\nGuarda sus vidas con tu poder,\nguía sus pasos al bien y al deber.\nDales la paz y la libertad,\nguárdalos siempre en tu bondad.\n\nAmén."}, "himno_infanteria_marina": {"title": "Marcha Heroica de Infantería de Marina", "author": "Música: Cándido R. Landache | Letra: José Mª Pemán", "text": "Infantes de Marina, marchemos a luchar,\nla Patria nos encarga las glorias de su mar.\nTriunfar o morir, por España pelear,\nque el honor de España es vencer o morir.\n\nPor la Cruz y por España,\nlucharemos con valor,\ny en la tierra y en el mar,\nla victoria brillará.\n\n¡Viva España! ¡Viva el Rey!\n¡Honor y Gloria a la Infantería de Marina!"}, "himno_armada": {"title": "Himno de la Armada", "author": "Armada Española", "text": "Marineros de España cantemos,\na la Patria con gozo y honor,\ny la enseña bendita juremos,\ndefender con orgullo y valor.\n\nPor los mares surcados de gloria,\nnuestras quillas supieron vencer,\ny en el libro inmortal de la historia,\nnuestro lema es triunfar o perder.\n\n¡Viva España! ¡Viva la Armada!"}, "himno_nacional": {"title": "Marcha Real (Himno Nacional)", "author": "Tradición / Letra histórica (José Mª Pemán)", "text": "¡Viva España! Alzad los brazos, hijos\ndel pueblo español,\nque vuelve a resurgir.\n\nGloria a la Patria que supo seguir,\nsobre el azul del mar el caminar del sol.\n\n¡Triunfa, España! Los yunques y las ruedas\ncanten al compás\ndel himno de la fe.\n\nJuntos con ellos cantemos de pie\nla vida nueva y fuerte de trabajo y paz."}, "la_muerte_no_es_el_final": {"title": "La Muerte no es el Final", "author": "Música y Letra: Cesáreo Gabaráin", "text": "Tú nos dijiste que la muerte\nno es el final del camino,\nque aunque de nuevo el cuerpo vuelva\na ser polvo en el polvo,\nel alma vivirá contigo.\n\nCuando la pena nos alcanza\npor un hermano perdido,\ncuando el adiós dolorido\nbusca en la fe su esperanza,\nen Tu palabra confiamos\ncon la certeza de hijos:\nque ya descanse en la gloria\nel que en la tierra ha servido."}};
 
-    if (audGeneralMMT) {
-      audGeneralMMT.onended = () => { onAudioTerminadoMMT(); };
-      audGeneralMMT.onerror = () => { onAudioTerminadoMMT(); };
+    // REPRODUCTORES DUALES
+    const audioBanda = document.getElementById('audioBandaMMT');
+    const audioCorneta = document.getElementById('audioCornetaMMT');
+
+    let itemMusicaSeleccionado = null;
+    let itemCornetaSeleccionado = null;
+
+    // ESTADO DE PLAYLISTS
+    let indicePistaSeleccionadaEnVentana = -1;
+    let playlistsGuardadas = {
+      "desfile_standard": [
+        {"tipo": "corneta", "id": "c_atencion", "nombre": "Atención"},
+        {"tipo": "corneta", "id": "c_firmes", "nombre": "Firmes"},
+        {"tipo": "corneta", "id": "c_defrente", "nombre": "De frente"},
+        {"tipo": "musica", "id": "m_infantes", "nombre": "Marcha de Infantes"},
+        {"tipo": "corneta", "id": "c_alto", "nombre": "Alto"},
+        {"tipo": "corneta", "id": "c_presenten", "nombre": "Presenten armas"},
+        {"tipo": "musica", "id": "m_espana_largo", "nombre": "Himno Nacional de España (Completo)"}
+      ]
+    };
+    let playlistEnCurso = false;
+    let playlistIndexActual = 0;
+
+    // Cargar persistencia
+    try {
+      const st = localStorage.getItem('mmt_playlists');
+      if (st) playlistsGuardadas = JSON.parse(st);
+    } catch(e) {}
+
+    // ==========================================
+    // COMPORTAMIENTO SINCRONIZADO DE LOS 4 DESPLEGABLES DE MÚSICA
+    // ==========================================
+    const selectIds = [
+      'selCatInstitucionales',
+      'selCatMarchas',
+      'selCatHimnos',
+      'selCatReligiosa'
+    ];
+
+    function onMusicaSelectChange(activeSelect, cat) {
+      const val = activeSelect.value;
+
+      // Desmarcar todos y restaurar a 'Seleccione...' los otros 3
+      selectIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && el !== activeSelect) {
+          el.value = '';
+          el.classList.remove('selected');
+        }
+      });
+
+      if (val) {
+        activeSelect.classList.add('selected');
+        itemMusicaSeleccionado = TODAS_MUSICAS.find(m => m.id === val);
+      } else {
+        activeSelect.classList.remove('selected');
+        itemMusicaSeleccionado = null;
+      }
+
+      actualizarEstadoBotonLetra();
     }
 
-    function onAudioTerminadoMMT() {
-      const statusBox = document.getElementById('audioStatusBarMMT');
-      if (statusBox) statusBox.style.display = 'none';
+    function actualizarEstadoBotonLetra() {
+      const btnL = document.getElementById('btnLyricsBandaCommon');
+      if (!btnL) return;
+      if (itemMusicaSeleccionado && itemMusicaSeleccionado.letraId && LETRAS_DB[itemMusicaSeleccionado.letraId]) {
+        btnL.style.opacity = '1';
+        btnL.style.pointerEvents = 'auto';
+      } else {
+        btnL.style.opacity = '0.5';
+      }
     }
 
-    function playAudioMMT(src, label) {
-      stopAllAudioMMT();
-      const statusBox = document.getElementById('audioStatusBarMMT');
-      const statusText = document.getElementById('audioStatusTextMMT');
+    // ==========================================
+    // CANAL 1: BANDA DE MÚSICA
+    // ==========================================
+    audioBanda.onended = () => {
+      onBandaFin();
+      if (playlistEnCurso) avanzarPlaylistPasoMMT();
+    };
+    audioBanda.onerror = () => {
+      onBandaFin();
+      if (playlistEnCurso) avanzarPlaylistPasoMMT();
+    };
+
+    function playMusicaSeleccionadaMMT() {
+      if (!itemMusicaSeleccionado) {
+        alert('Por favor, seleccione primero un himno o marcha en cualquiera de los cuatro desplegables.');
+        return;
+      }
+      playBandaAudioItem(itemMusicaSeleccionado);
+    }
+
+    function playBandaAudioItem(item) {
+      stopBandaMMT();
+      const statusBox = document.getElementById('statusBandaMMT');
+      const statusText = document.getElementById('statusBandaTextMMT');
       if (statusBox) statusBox.style.display = 'flex';
-      if (statusText) statusText.textContent = '▶️ ' + label;
+      if (statusText) statusText.textContent = '🎺 ' + item.nombre;
 
-      if (audGeneralMMT) {
-        currentActiveAudioMMT = audGeneralMMT;
-        audGeneralMMT.src = src;
-        audGeneralMMT.currentTime = 0;
-        audGeneralMMT.play().catch(e => {
-          console.error('Error audGeneralMMT:', e);
-          onAudioTerminadoMMT();
-        });
+      audioBanda.src = item.archivo;
+      audioBanda.currentTime = 0;
+      audioBanda.play().catch(err => {
+        if (item.urlRemota) {
+          audioBanda.src = item.urlRemota;
+          audioBanda.play().catch(e => {
+            alert('Audio descargable bajo demanda: ' + item.nombre);
+            onBandaFin();
+          });
+        } else {
+          onBandaFin();
+        }
+      });
+    }
+
+    function stopBandaMMT() {
+      try { audioBanda.pause(); audioBanda.currentTime = 0; } catch(e){}
+      onBandaFin();
+    }
+
+    function onBandaFin() {
+      const statusBox = document.getElementById('statusBandaMMT');
+      if (statusBox) statusBox.style.display = 'none';
+    }
+
+    function addMusicaSeleccionadaAPlaylistMMT() {
+      if (!itemMusicaSeleccionado) {
+        alert('Seleccione un himno o marcha para añadirlo a la lista de reproducción.');
+        return;
+      }
+      const sel = document.getElementById('selPlaylistActiva');
+      const key = sel ? sel.value : 'desfile_standard';
+      if (!playlistsGuardadas[key]) playlistsGuardadas[key] = [];
+      playlistsGuardadas[key].push({
+        tipo: 'musica',
+        id: itemMusicaSeleccionado.id,
+        nombre: itemMusicaSeleccionado.nombre
+      });
+      guardarListaActualMMT(true);
+      renderVentanaPlaylistMMT();
+    }
+
+    function verLetraMusicaSeleccionadaMMT() {
+      if (!itemMusicaSeleccionado || !itemMusicaSeleccionado.letraId) {
+        alert('No se dispone de letra escrita para esta selección.');
+        return;
+      }
+      mostrarLetraModalMMT(itemMusicaSeleccionado.letraId);
+    }
+
+    // ==========================================
+    // CANAL 2: TOQUES DE CORNETA (INDEPENDIENTE)
+    // ==========================================
+    audioCorneta.onended = () => {
+      onCornetaFin();
+      if (playlistEnCurso && audioBanda.paused) avanzarPlaylistPasoMMT();
+    };
+    audioCorneta.onerror = () => {
+      onCornetaFin();
+      if (playlistEnCurso && audioBanda.paused) avanzarPlaylistPasoMMT();
+    };
+
+    function playCornetaSeleccionadaMMT() {
+      const sel = document.getElementById('selCorneta');
+      const val = sel ? sel.value : '';
+      if (!val) {
+        alert('Por favor, seleccione un toque de corneta.');
+        return;
+      }
+      const item = CORNETAS_DB.find(c => c.id === val);
+      if (item) playCornetaAudioItem(item);
+    }
+
+    function playCornetaAudioItem(item) {
+      stopCornetaMMT();
+      const statusBox = document.getElementById('statusCornetaMMT');
+      const statusText = document.getElementById('statusCornetaTextMMT');
+      if (statusBox) statusBox.style.display = 'flex';
+      if (statusText) statusText.textContent = '📯 ' + item.nombre;
+
+      audioCorneta.src = item.archivo;
+      audioCorneta.currentTime = 0;
+      audioCorneta.play().catch(e => {
+        console.error('Error corneta:', e);
+        onCornetaFin();
+      });
+    }
+
+    function stopCornetaMMT() {
+      try { audioCorneta.pause(); audioCorneta.currentTime = 0; } catch(e){}
+      onCornetaFin();
+    }
+
+    function onCornetaFin() {
+      const statusBox = document.getElementById('statusCornetaMMT');
+      if (statusBox) statusBox.style.display = 'none';
+    }
+
+    function addCornetaSeleccionadaAPlaylistMMT() {
+      const sel = document.getElementById('selCorneta');
+      const val = sel ? sel.value : '';
+      if (!val) {
+        alert('Seleccione un toque de corneta para añadirlo a la lista de reproducción.');
+        return;
+      }
+      const item = CORNETAS_DB.find(c => c.id === val);
+      if (!item) return;
+
+      const selPl = document.getElementById('selPlaylistActiva');
+      const key = selPl ? selPl.value : 'desfile_standard';
+      if (!playlistsGuardadas[key]) playlistsGuardadas[key] = [];
+      playlistsGuardadas[key].push({
+        tipo: 'corneta',
+        id: item.id,
+        nombre: item.nombre
+      });
+      guardarListaActualMMT(true);
+      renderVentanaPlaylistMMT();
+    }
+
+    // ==========================================
+    // BLOQUE 3: LISTAS DE REPRODUCCIÓN (PLAYLISTS)
+    // ==========================================
+    function cambiarPlaylistActivaMMT(key) {
+      indicePistaSeleccionadaEnVentana = -1;
+      renderVentanaPlaylistMMT();
+    }
+
+    function renderVentanaPlaylistMMT() {
+      const cont = document.getElementById('playlistWindowContainer');
+      if (!cont) return;
+      cont.innerHTML = '';
+
+      const sel = document.getElementById('selPlaylistActiva');
+      const key = sel ? sel.value : 'desfile_standard';
+      const items = playlistsGuardadas[key] || [];
+
+      if (items.length === 0) {
+        cont.innerHTML = '<div style="color:#64748b; font-size:12px; text-align:center; padding:24px;">La lista de reproducción está vacía.<br>Seleccione canciones o toques arriba y pulse <b>AÑADIR A LISTA</b>.</div>';
+        return;
+      }
+
+      items.forEach((it, idx) => {
+        const row = document.createElement('div');
+        let classes = 'pl-item-row';
+        if (idx === indicePistaSeleccionadaEnVentana) classes += ' selected';
+        if (playlistEnCurso && idx === playlistIndexActual) classes += ' active-playing';
+        row.className = classes;
+
+        const icono = (it.tipo === 'corneta') ? '📯' : '🎺';
+        row.innerHTML = `
+          <span>${idx + 1}. ${icono} ${it.nombre}</span>
+          <span style="font-size:10px; opacity:0.6; text-transform:uppercase;">${it.tipo}</span>
+        `;
+        row.onclick = () => {
+          indicePistaSeleccionadaEnVentana = idx;
+          renderVentanaPlaylistMMT();
+        };
+        cont.appendChild(row);
+      });
+    }
+
+    function subirPistaSeleccionadaMMT() {
+      const sel = document.getElementById('selPlaylistActiva');
+      const key = sel ? sel.value : 'desfile_standard';
+      const items = playlistsGuardadas[key] || [];
+      if (indicePistaSeleccionadaEnVentana > 0 && indicePistaSeleccionadaEnVentana < items.length) {
+        const temp = items[indicePistaSeleccionadaEnVentana];
+        items[indicePistaSeleccionadaEnVentana] = items[indicePistaSeleccionadaEnVentana - 1];
+        items[indicePistaSeleccionadaEnVentana - 1] = temp;
+        indicePistaSeleccionadaEnVentana--;
+        renderVentanaPlaylistMMT();
       }
     }
 
-    function stopAllAudioMMT() {
-      if (audGeneralMMT) {
-        try {
-          audGeneralMMT.pause();
-          audGeneralMMT.currentTime = 0;
-        } catch(e){}
+    function bajarPistaSeleccionadaMMT() {
+      const sel = document.getElementById('selPlaylistActiva');
+      const key = sel ? sel.value : 'desfile_standard';
+      const items = playlistsGuardadas[key] || [];
+      if (indicePistaSeleccionadaEnVentana >= 0 && indicePistaSeleccionadaEnVentana < items.length - 1) {
+        const temp = items[indicePistaSeleccionadaEnVentana];
+        items[indicePistaSeleccionadaEnVentana] = items[indicePistaSeleccionadaEnVentana + 1];
+        items[indicePistaSeleccionadaEnVentana + 1] = temp;
+        indicePistaSeleccionadaEnVentana++;
+        renderVentanaPlaylistMMT();
       }
-      const statusBox = document.getElementById('audioStatusBarMMT');
-      if (statusBox) statusBox.style.display = 'none';
+    }
+
+    function borrarPistaSeleccionadaMMT() {
+      const sel = document.getElementById('selPlaylistActiva');
+      const key = sel ? sel.value : 'desfile_standard';
+      const items = playlistsGuardadas[key] || [];
+      if (indicePistaSeleccionadaEnVentana >= 0 && indicePistaSeleccionadaEnVentana < items.length) {
+        items.splice(indicePistaSeleccionadaEnVentana, 1);
+        if (indicePistaSeleccionadaEnVentana >= items.length) {
+          indicePistaSeleccionadaEnVentana = items.length - 1;
+        }
+        renderVentanaPlaylistMMT();
+      }
+    }
+
+    function guardarListaActualMMT(silencioso = false) {
+      try {
+        localStorage.setItem('mmt_playlists', JSON.stringify(playlistsGuardadas));
+        if (!silencioso) {
+          alert('✅ Lista de reproducción guardada con éxito.');
+        }
+      } catch(e) {
+        console.error('Error al guardar:', e);
+      }
+    }
+
+    function crearNuevaListaPromptMMT() {
+      const nombre = prompt('Nombre de la nueva lista (ej: Jura de Bandera):');
+      if (!nombre || !nombre.trim()) return;
+      const key = nombre.trim().toLowerCase().replace(/\s+/g, '_');
+      if (!playlistsGuardadas[key]) {
+        playlistsGuardadas[key] = [];
+        guardarListaActualMMT(true);
+        refrescarSelectPlaylists();
+        const sel = document.getElementById('selPlaylistActiva');
+        if (sel) sel.value = key;
+        cambiarPlaylistActivaMMT(key);
+      }
+    }
+
+    function refrescarSelectPlaylists() {
+      const sel = document.getElementById('selPlaylistActiva');
+      if (!sel) return;
+      const actual = sel.value;
+      sel.innerHTML = '';
+      Object.keys(playlistsGuardadas).forEach(k => {
+        const opt = document.createElement('option');
+        opt.value = k;
+        opt.textContent = '🎖️ ' + k.replace(/_/g, ' ').toUpperCase();
+        sel.appendChild(opt);
+      });
+      if (playlistsGuardadas[actual]) sel.value = actual;
+    }
+
+    function iniciarPlaylistMMT() {
+      const sel = document.getElementById('selPlaylistActiva');
+      const key = sel ? sel.value : 'desfile_standard';
+      const items = playlistsGuardadas[key] || [];
+      if (items.length === 0) {
+        alert('La lista está vacía.');
+        return;
+      }
+      detenerPlaylistMMT();
+      playlistEnCurso = true;
+      playlistIndexActual = 0;
+      ejecutarItemPlaylistIndex(key, playlistIndexActual);
+    }
+
+    function ejecutarItemPlaylistIndex(key, index) {
+      const items = playlistsGuardadas[key] || [];
+      if (index >= items.length) {
+        detenerPlaylistMMT();
+        return;
+      }
+      renderVentanaPlaylistMMT();
+      const it = items[index];
+      if (it.tipo === 'corneta') {
+        const track = CORNETAS_DB.find(c => c.id === it.id);
+        if (track) playCornetaAudioItem(track);
+        else avanzarPlaylistPasoMMT();
+      } else {
+        const track = TODAS_MUSICAS.find(m => m.id === it.id);
+        if (track) playBandaAudioItem(track);
+        else avanzarPlaylistPasoMMT();
+      }
+    }
+
+    function avanzarPlaylistPasoMMT() {
+      if (!playlistEnCurso) return;
+      const sel = document.getElementById('selPlaylistActiva');
+      const key = sel ? sel.value : 'desfile_standard';
+      playlistIndexActual++;
+      ejecutarItemPlaylistIndex(key, playlistIndexActual);
+    }
+
+    function detenerPlaylistMMT() {
+      playlistEnCurso = false;
+      playlistIndexActual = 0;
+      stopBandaMMT();
+      stopCornetaMMT();
+      renderVentanaPlaylistMMT();
+    }
+
+    // ==========================================
+    // MODAL DE LETRAS
+    // ==========================================
+    function mostrarLetraModalMMT(letraKey) {
+      const data = LETRAS_DB[letraKey];
+      if (!data) return;
+
+      document.getElementById('modalLyricsTitle').textContent = data.title;
+      document.getElementById('modalLyricsAuthor').textContent = data.author;
+      document.getElementById('modalLyricsText').textContent = data.text;
+
+      const modal = document.getElementById('lyricsModal');
+      if (modal) modal.style.display = 'flex';
+    }
+
+    function cerrarLyricsModalMMT(e) {
+      const modal = document.getElementById('lyricsModal');
+      if (modal) modal.style.display = 'none';
     }
 
     // WakeLock API
@@ -175,6 +802,13 @@
       });
       requestWakeLock();
     }
+
+    // INICIALIZACIÓN
+    window.addEventListener('DOMContentLoaded', () => {
+      refrescarSelectPlaylists();
+      renderVentanaPlaylistMMT();
+      actualizarEstadoBotonLetra();
+    });
   </script>
 </body>
 </html>
