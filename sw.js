@@ -1,4 +1,4 @@
-// SW Musica Militar Single Channel Playlist v1792958819
+// SW Musica Militar Default Lista Ejemplo v1792959039
 self.addEventListener('install', e => self.skipWaiting());
 self.addEventListener('activate', e => {
   e.waitUntil(

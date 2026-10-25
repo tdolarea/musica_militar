@@ -499,7 +499,7 @@
       <!-- Selector de lista existente y Crear nueva -->
       <div class="playlist-top-controls">
         <select id="selPlaylistActiva" class="playlist-select-active" onchange="cambiarPlaylistActivaMMT(this.value)">
-          <option value="desfile_standard">🎖️ Desfile de Ordenanza</option>
+          <option value="lista_ejemplo" selected>🎖️ LISTA EJEMPLO</option>
         </select>
         <button type="button" class="btn-pl-small" onclick="crearNuevaListaPromptMMT()">➕ Nueva Lista</button>
       </div>
@@ -554,7 +554,7 @@
   <audio id="audioCornetaMMT" preload="auto" playsinline></audio>
 
   <script>
-    const APP_VERSION = 'v1792958819';
+    const APP_VERSION = 'v1792959039';
 
     // ==========================================
     // BASES DE DATOS TOTALES CON PAÍSES
@@ -605,23 +605,85 @@
     // ESTADO DE PLAYLISTS
     let indicePistaSeleccionadaEnVentana = -1;
     let playlistsGuardadas = {
-      "desfile_standard": [
-        {"tipo": "corneta", "id": "co_atencion", "nombre": "Atención"},
-        {"tipo": "corneta", "id": "co_firmes", "nombre": "Firmes"},
-        {"tipo": "corneta", "id": "co_defrente", "nombre": "De frente"},
-        {"tipo": "musica", "id": "mm_marchadeinfantes", "nombre": "Marcha de infantes"},
-        {"tipo": "corneta", "id": "co_alto", "nombre": "Alto"},
-        {"tipo": "corneta", "id": "co_presentenarmas", "nombre": "Presenten armas"},
-        {"tipo": "musica", "id": "mm_espaniacompleto", "nombre": "Himno Nacional de España (Completo)"}
-      ]
+      "lista_ejemplo": [
+        {
+                "tipo": "corneta",
+                "id": "co_firmes",
+                "nombre": "Firmes"
+        },
+        {
+                "tipo": "corneta",
+                "id": "co_sobreelhombroderecho",
+                "nombre": "Sobre el hombro derecho"
+        },
+        {
+                "tipo": "musica",
+                "id": "mm_ganandobarlovento",
+                "nombre": "Ganando Barlovento"
+        },
+        {
+                "tipo": "musica",
+                "id": "mm_lascorsarias",
+                "nombre": "Las corsarias"
+        },
+        {
+                "tipo": "musica",
+                "id": "mm_sanmarcial",
+                "nombre": "San Marcial"
+        },
+        {
+                "tipo": "musica",
+                "id": "mm_sanquintin",
+                "nombre": "San Quintin"
+        },
+        {
+                "tipo": "musica",
+                "id": "mm_elturuta",
+                "nombre": "El turuta"
+        },
+        {
+                "tipo": "musica",
+                "id": "mm_laorgiadorada",
+                "nombre": "La Orgia Dorada"
+        },
+        {
+                "tipo": "musica",
+                "id": "mm_bajoladobleaguila",
+                "nombre": "Bajo La Doble Aguila"
+        },
+        {
+                "tipo": "musica",
+                "id": "mm_elabanico",
+                "nombre": "El abanico"
+        },
+        {
+                "tipo": "corneta",
+                "id": "co_alto",
+                "nombre": "Alto"
+        },
+        {
+                "tipo": "corneta",
+                "id": "co_sobreelhombroderecho",
+                "nombre": "Sobre el hombro derecho"
+        },
+        {
+                "tipo": "corneta",
+                "id": "co_descanso",
+                "nombre": "Descanso"
+        }
+]
     };
     let playlistEnCurso = false;
     let playlistIndexActual = 0;
 
-    // Cargar persistencia
+        // Cargar persistencia
     try {
-      const st = localStorage.getItem('mmt_playlists');
-      if (st) playlistsGuardadas = JSON.parse(st);
+      const st = localStorage.getItem('mmt_playlists_v2');
+      if (st) {
+        playlistsGuardadas = JSON.parse(st);
+      } else {
+        localStorage.setItem('mmt_playlists_v2', JSON.stringify(playlistsGuardadas));
+      }
     } catch(e) {}
 
     // ==========================================
@@ -729,7 +791,7 @@
         return;
       }
       const sel = document.getElementById('selPlaylistActiva');
-      const key = sel ? sel.value : 'desfile_standard';
+      const key = sel ? sel.value : 'lista_ejemplo';
       if (!playlistsGuardadas[key]) playlistsGuardadas[key] = [];
       playlistsGuardadas[key].push({
         tipo: 'musica',
@@ -858,7 +920,7 @@
       cont.innerHTML = '';
 
       const sel = document.getElementById('selPlaylistActiva');
-      const key = sel ? sel.value : 'desfile_standard';
+      const key = sel ? sel.value : 'lista_ejemplo';
       const items = playlistsGuardadas[key] || [];
 
       if (items.length === 0) {
@@ -888,7 +950,7 @@
 
     function subirPistaSeleccionadaMMT() {
       const sel = document.getElementById('selPlaylistActiva');
-      const key = sel ? sel.value : 'desfile_standard';
+      const key = sel ? sel.value : 'lista_ejemplo';
       const items = playlistsGuardadas[key] || [];
       if (indicePistaSeleccionadaEnVentana > 0 && indicePistaSeleccionadaEnVentana < items.length) {
         const temp = items[indicePistaSeleccionadaEnVentana];
@@ -901,7 +963,7 @@
 
     function bajarPistaSeleccionadaMMT() {
       const sel = document.getElementById('selPlaylistActiva');
-      const key = sel ? sel.value : 'desfile_standard';
+      const key = sel ? sel.value : 'lista_ejemplo';
       const items = playlistsGuardadas[key] || [];
       if (indicePistaSeleccionadaEnVentana >= 0 && indicePistaSeleccionadaEnVentana < items.length - 1) {
         const temp = items[indicePistaSeleccionadaEnVentana];
@@ -914,7 +976,7 @@
 
     function borrarPistaSeleccionadaMMT() {
       const sel = document.getElementById('selPlaylistActiva');
-      const key = sel ? sel.value : 'desfile_standard';
+      const key = sel ? sel.value : 'lista_ejemplo';
       const items = playlistsGuardadas[key] || [];
       if (indicePistaSeleccionadaEnVentana >= 0 && indicePistaSeleccionadaEnVentana < items.length) {
         items.splice(indicePistaSeleccionadaEnVentana, 1);
@@ -927,7 +989,7 @@
 
     function guardarListaActualMMT(silencioso = false) {
       try {
-        localStorage.setItem('mmt_playlists', JSON.stringify(playlistsGuardadas));
+        localStorage.setItem('mmt_playlists_v2', JSON.stringify(playlistsGuardadas));
         if (!silencioso) {
           alert('✅ Lista de reproducción guardada con éxito.');
         }
@@ -966,7 +1028,7 @@
 
     function iniciarPlaylistMMT() {
       const sel = document.getElementById('selPlaylistActiva');
-      const key = sel ? sel.value : 'desfile_standard';
+      const key = sel ? sel.value : 'lista_ejemplo';
       const items = playlistsGuardadas[key] || [];
       if (items.length === 0) {
         alert('La lista está vacía.');
@@ -1013,7 +1075,7 @@
     function avanzarPlaylistPasoMMT() {
       if (!playlistEnCurso) return;
       const sel = document.getElementById('selPlaylistActiva');
-      const key = sel ? sel.value : 'desfile_standard';
+      const key = sel ? sel.value : 'lista_ejemplo';
       playlistIndexActual++;
       ejecutarItemPlaylistIndex(key, playlistIndexActual);
     }
