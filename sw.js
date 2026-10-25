@@ -1,4 +1,4 @@
-// SW Musica Militar Default Lista Ejemplo v1792959039
+// SW Musica Militar Lista Ejemplo con De Frente 1792959260
 self.addEventListener('install', e => self.skipWaiting());
 self.addEventListener('activate', e => {
   e.waitUntil(

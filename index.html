@@ -554,7 +554,7 @@
   <audio id="audioCornetaMMT" preload="auto" playsinline></audio>
 
   <script>
-    const APP_VERSION = 'v1792959039';
+    const APP_VERSION = 'v1792959260';
 
     // ==========================================
     // BASES DE DATOS TOTALES CON PAÍSES
@@ -615,6 +615,11 @@
                 "tipo": "corneta",
                 "id": "co_sobreelhombroderecho",
                 "nombre": "Sobre el hombro derecho"
+        },
+        {
+                "tipo": "corneta",
+                "id": "co_defrente",
+                "nombre": "De frente"
         },
         {
                 "tipo": "musica",
@@ -678,11 +683,11 @@
 
         // Cargar persistencia
     try {
-      const st = localStorage.getItem('mmt_playlists_v2');
+      const st = localStorage.getItem('mmt_playlists_v3_1792959260');
       if (st) {
         playlistsGuardadas = JSON.parse(st);
       } else {
-        localStorage.setItem('mmt_playlists_v2', JSON.stringify(playlistsGuardadas));
+        localStorage.setItem('mmt_playlists_v3_1792959260', JSON.stringify(playlistsGuardadas));
       }
     } catch(e) {}
 
@@ -989,7 +994,7 @@
 
     function guardarListaActualMMT(silencioso = false) {
       try {
-        localStorage.setItem('mmt_playlists_v2', JSON.stringify(playlistsGuardadas));
+        localStorage.setItem('mmt_playlists_v3_1792959260', JSON.stringify(playlistsGuardadas));
         if (!silencioso) {
           alert('✅ Lista de reproducción guardada con éxito.');
         }
