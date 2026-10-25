@@ -1,4 +1,4 @@
-// SW Musica Militar Blue Corneta v1792959486
+// SW Musica Militar Clean Footer v1792959566
 self.addEventListener('install', e => self.skipWaiting());
 self.addEventListener('activate', e => {
   e.waitUntil(
