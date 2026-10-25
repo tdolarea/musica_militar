@@ -1,4 +1,4 @@
-// SW Musica Militar Fixed Playlist Fallback v1792959775
+// SW Musica Militar Strict User Texts v1792959843
 self.addEventListener('install', e => self.skipWaiting());
 self.addEventListener('activate', e => {
   e.waitUntil(
