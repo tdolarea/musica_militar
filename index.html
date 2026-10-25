@@ -108,10 +108,7 @@
       flex: 1; background: #1e293b; color: #f8fafc; border: 1.5px solid #38bdf8;
       border-radius: 8px; padding: 10px; font-size: 12px; font-weight: 700;
     }
-    .btn-pl-small {
-      background: #0284c7; border: none; color: white; padding: 8px 12px; border-radius: 8px;
-      font-size: 12px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 4px;
-    }
+    .btn-pl-small { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); border: 1.5px solid #38bdf8; color: white; padding: 8px 12px; border-radius: 8px; font-size: 12px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 4px; }
 
     .playlist-window {
       background: #070d1e; border: 1.5px solid #1e3a8a; border-radius: 8px; padding: 8px;
@@ -133,10 +130,7 @@
     .playlist-reorder-bar {
       display: flex; gap: 8px; align-items: center; margin-bottom: 12px;
     }
-    .btn-reorder {
-      background: #334155; border: 1px solid #475569; color: white; padding: 6px 12px;
-      border-radius: 6px; font-size: 12px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 4px;
-    }
+    .btn-reorder { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); border: 1px solid #38bdf8; color: white; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 4px; }
     .btn-reorder:active { transform: scale(0.95); }
     .btn-del-item {
       background: #991b1b; border: 1px solid #ef4444; color: white; padding: 6px 12px;
@@ -517,13 +511,13 @@
 
       <!-- Barra de ejecución y guardado -->
       <div class="playlist-exec-bar">
-        <button type="button" id="btnPlayPlaylist" class="btn-action-main" style="background: #16a34a; color: white;" onclick="iniciarPlaylistMMT()">
+        <button type="button" id="btnPlayPlaylist" class="btn-action-main btn-play-banda" onclick="iniciarPlaylistMMT()">
           <span>▶️</span> <span>INICIAR</span>
         </button>
-        <button type="button" class="btn-action-main" style="background: #0284c7; color: white;" onclick="saltarSiguientePistaPlaylistMMT()">
+        <button type="button" class="btn-action-main btn-play-banda" onclick="saltarSiguientePistaPlaylistMMT()">
           <span>⏭️</span> <span>NEXT</span>
         </button>
-        <button type="button" class="btn-action-main" style="background: #1e3a8a; color: #38bdf8; border: 1.5px solid #38bdf8;" onclick="guardarListaActualMMT()">
+        <button type="button" class="btn-action-main btn-play-banda" onclick="guardarListaActualMMT()">
           <span>💾</span> <span>GUARDAR</span>
         </button>
       </div>
@@ -553,7 +547,7 @@
   <audio id="audioCornetaMMT" preload="auto" playsinline></audio>
 
   <script>
-    const APP_VERSION = 'v1792960790';
+    const APP_VERSION = 'v1792960888';
 
     // ==========================================
     // BASES DE DATOS TOTALES CON PAÍSES

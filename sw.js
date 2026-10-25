@@ -1,4 +1,4 @@
-// SW Musica Militar Clean Playlist Bar v1792960790
+// SW Musica Militar All Blue Buttons v1792960888
 self.addEventListener('install', e => self.skipWaiting());
 self.addEventListener('activate', e => {
   e.waitUntil(
