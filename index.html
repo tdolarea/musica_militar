@@ -489,12 +489,24 @@
         <span>📋 Lista de reproducción</span>
         </div>
 
-      <!-- Selector de lista existente y Crear nueva -->
-      <div class="playlist-top-controls">
-        <select id="selPlaylistActiva" class="playlist-select-active" onchange="cambiarPlaylistActivaMMT(this.value)">
+      <!-- Desplegable de lista existente -->
+      <div class="field-group" style="margin-bottom: 8px;">
+        <select id="selPlaylistActiva" class="custom-select" onchange="cambiarPlaylistActivaMMT(this.value)">
           <option value="lista_ejemplo" selected>🎖️ LISTA EJEMPLO</option>
         </select>
-        <button type="button" class="btn-pl-small" onclick="crearNuevaListaPromptMMT()">➕ Nueva Lista</button>
+      </div>
+
+      <!-- Barra de gestión de lista (Nueva, Guardar cambios, Borrar) -->
+      <div class="playlist-mgmt-bar" style="display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 8px; margin-bottom: 12px;">
+        <button type="button" class="btn-action-main btn-play-banda" onclick="crearNuevaListaPromptMMT()">
+          <span>➕</span> <span>Nueva Lista</span>
+        </button>
+        <button type="button" class="btn-action-main btn-play-banda" onclick="guardarListaActualMMT()">
+          <span>💾</span> <span>Guardar cambios</span>
+        </button>
+        <button type="button" class="btn-action-main btn-play-banda" onclick="borrarListaActualPromptMMT()">
+          <span>🗑️</span> <span>Borrar Lista</span>
+        </button>
       </div>
 
       <!-- Ventana con las pistas de la lista -->
@@ -509,16 +521,13 @@
         <button type="button" class="btn-del-item" onclick="borrarPistaSeleccionadaMMT()">🗑️ Quitar pista</button>
       </div>
 
-      <!-- Barra de ejecución y guardado -->
-      <div class="playlist-exec-bar">
+      <!-- Barra de reproducción -->
+      <div class="playlist-exec-bar" style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 8px;">
         <button type="button" id="btnPlayPlaylist" class="btn-action-main btn-play-banda" onclick="iniciarPlaylistMMT()">
           <span>▶️</span> <span>INICIAR</span>
         </button>
         <button type="button" class="btn-action-main btn-play-banda" onclick="saltarSiguientePistaPlaylistMMT()">
           <span>⏭️</span> <span>NEXT</span>
-        </button>
-        <button type="button" class="btn-action-main btn-play-banda" onclick="guardarListaActualMMT()">
-          <span>💾</span> <span>GUARDAR</span>
         </button>
       </div>
     </div>
@@ -547,7 +556,7 @@
   <audio id="audioCornetaMMT" preload="auto" playsinline></audio>
 
   <script>
-    const APP_VERSION = 'v1792960888';
+    const APP_VERSION = 'v1792961120';
 
     // ==========================================
     // BASES DE DATOS TOTALES CON PAÍSES
@@ -999,6 +1008,26 @@
       } catch(e) {
         console.error('Error al guardar:', e);
       }
+    }
+
+        function borrarListaActualPromptMMT() {
+      const sel = document.getElementById('selPlaylistActiva');
+      const key = sel ? sel.value : '';
+      if (!key) return;
+
+      if (key === 'lista_ejemplo') {
+        if (!confirm("¿Desea vaciar o eliminar la 'Lista Ejemplo'?")) return;
+      } else {
+        if (!confirm(`¿Desea eliminar definitivamente la lista '${key.replace(/_/g, ' ').toUpperCase()}'?`)) return;
+      }
+
+      delete playlistsGuardadas[key];
+      if (Object.keys(playlistsGuardadas).length === 0) {
+        playlistsGuardadas['mi_lista'] = [];
+      }
+      guardarListaActualMMT(true);
+      refrescarSelectPlaylists();
+      renderVentanaPlaylistMMT();
     }
 
     function crearNuevaListaPromptMMT() {
