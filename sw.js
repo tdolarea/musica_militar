@@ -1,4 +1,4 @@
-// SW Musica Militar Clean Badges v1792959409
+// SW Musica Militar Blue Corneta v1792959486
 self.addEventListener('install', e => self.skipWaiting());
 self.addEventListener('activate', e => {
   e.waitUntil(
