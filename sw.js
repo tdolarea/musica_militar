@@ -1,4 +1,4 @@
-// SW Musica Militar Clean Titles v1792958386
+// SW Musica Militar Single Channel Playlist v1792958819
 self.addEventListener('install', e => self.skipWaiting());
 self.addEventListener('activate', e => {
   e.waitUntil(

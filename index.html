@@ -554,7 +554,7 @@
   <audio id="audioCornetaMMT" preload="auto" playsinline></audio>
 
   <script>
-    const APP_VERSION = 'v1792958386';
+    const APP_VERSION = 'v1792958819';
 
     // ==========================================
     // BASES DE DATOS TOTALES CON PAÍSES
@@ -819,9 +819,7 @@
       activeCornetaSource = null;
       const statusBox = document.getElementById('statusCornetaMMT');
       if (statusBox) statusBox.style.display = 'none';
-      if (playlistEnCurso && audioBanda.paused) {
-        avanzarPlaylistPasoMMT();
-      }
+      // Canal de corneta manual independiente
     }
 
     function addCornetaSeleccionadaAPlaylistMMT() {
@@ -988,14 +986,27 @@
       }
       renderVentanaPlaylistMMT();
       const it = items[index];
+
+      // Toda la playlist se reproduce por el canal de la Banda de forma unificada y secuencial
       if (it.tipo === 'corneta') {
         const track = CORNETAS_DB.find(c => c.id === it.id);
-        if (track) playCornetaAudioItem(track);
-        else avanzarPlaylistPasoMMT();
+        if (track) {
+          playBandaAudioItem({
+            id: track.id,
+            nombre: '📯 ' + track.nombre,
+            archivo: track.archivo,
+            urlRemota: track.urlRemota
+          });
+        } else {
+          avanzarPlaylistPasoMMT();
+        }
       } else {
         const track = TODAS_MUSICAS.find(m => m.id === it.id);
-        if (track) playBandaAudioItem(track);
-        else avanzarPlaylistPasoMMT();
+        if (track) {
+          playBandaAudioItem(track);
+        } else {
+          avanzarPlaylistPasoMMT();
+        }
       }
     }
 
